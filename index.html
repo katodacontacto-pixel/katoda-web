@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katoda — Cursos de Excel y Power BI</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --principal: #6C4EF6;
+    --acento: #A98EFF;
+    --noche: #1A1120;
+    --neblina: #E8E4FF;
+    --profundo: #5038D4;
+    --blanco: #FFFFFF;
+    --gris: #6B6B7A;
+    --gris-claro: #F5F4FB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', Arial, sans-serif;
+    background: var(--noche);
+    color: var(--blanco);
+    line-height: 1.6;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,17,32,0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(108,78,246,0.25);
+  }
+  .nav-tabs-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 24px;
+  }
+  .nav-tabs-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    flex-shrink: 0;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #7070A0;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--acento); }
+  .nav-tab.activo { color: var(--acento); border-bottom-color: var(--acento); }
+
+  /* ── INTRO HERRAMIENTAS ── */
+  .herramientas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .herramienta-card {
+    background: #2A1E3A;
+    border: 1px solid rgba(108,78,246,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .herramienta-header {
+    padding: 24px 28px 20px;
+    border-bottom: 1px solid rgba(108,78,246,0.15);
+  }
+  .herramienta-header.excel-color { background: rgba(33,115,70,0.15); }
+  .herramienta-header.pbi-color   { background: rgba(243,156,18,0.12); }
+  .herramienta-icono { font-size: 32px; margin-bottom: 10px; }
+  .herramienta-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--blanco);
+    margin: 0 0 4px 0;
+  }
+  .herramienta-sub { font-size: 13px; color: #9090A8; margin: 0; }
+
+  /* ── VIDEO PLACEHOLDER ── */
+  .video-placeholder {
+    position: relative;
+    background: #1A1120;
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(108,78,246,0.15);
+  }
+  .video-placeholder.tiene-video { cursor: pointer; }
+  .video-play {
+    width: 52px; height: 52px;
+    background: rgba(108,78,246,0.7);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    color: white;
+    padding-left: 4px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .video-placeholder:hover .video-play {
+    background: var(--principal);
+    transform: scale(1.08);
+  }
+  .video-label { font-size: 12px; color: #6060A0; letter-spacing: 0.5px; }
+  .herramienta-body { padding: 20px 28px; }
+  .herramienta-lista {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+  .herramienta-lista li {
+    font-size: 14px;
+    color: #B0A8CC;
+    padding: 6px 0 6px 20px;
+    position: relative;
+    border-bottom: 1px solid rgba(108,78,246,0.1);
+  }
+  .herramienta-lista li:last-child { border-bottom: none; }
+  .herramienta-lista li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--acento); font-weight: 700;
+  }
+  .herramienta-para {
+    font-size: 13px;
+    color: #8080A0;
+    background: rgba(108,78,246,0.07);
+    border-radius: 8px;
+    padding: 10px 14px;
+    line-height: 1.6;
+  }
+  .herramienta-para strong { color: var(--acento); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--noche);
+    padding: 64px 48px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(108,78,246,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    width: 72px;
+    height: auto;
+    margin-bottom: 24px;
+    border-radius: 12px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #A98EFF, #6C4EF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--acento);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero-slogan {
+    font-size: 15px;
+    color: var(--gris);
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  .hero-desc {
+    max-width: 620px;
+    margin: 0 auto 40px;
+    font-size: 17px;
+    color: #C4C0D8;
+    line-height: 1.75;
+  }
+  .hero-desc strong { color: var(--blanco); }
+
+  /* ── SECCIÓN GENÉRICA ── */
+  .seccion {
+    padding: 72px 48px;
+  }
+  .seccion-clara {
+    background: var(--gris-claro);
+    color: var(--noche);
+  }
+  .seccion-clara .label { color: var(--profundo); }
+  .seccion-clara p, .seccion-clara li { color: #3A3650; }
+  .seccion-clara h2 { color: var(--noche); }
+  .seccion-clara h3 { color: var(--profundo); }
+  .seccion-oscura {
+    background: #221830;
+  }
+
+  .contenedor { max-width: 860px; margin: 0 auto; }
+
+  .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  h2 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--acento);
+    margin-bottom: 12px;
+    margin-top: 40px;
+  }
+  p { font-size: 16px; line-height: 1.75; margin-bottom: 16px; }
+
+  /* ── GRID DIFERENCIADORES ── */
+  .grid-dif {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+  }
+  .card-dif {
+    background: #2A1E3A;
+    border: 1px solid rgba(108,78,246,0.25);
+    border-radius: 14px;
+    padding: 28px 24px;
+  }
+  .card-dif .icono { font-size: 28px; margin-bottom: 14px; }
+  .card-dif h4 { font-size: 16px; font-weight: 600; color: var(--blanco); margin-bottom: 8px; }
+  .card-dif p { font-size: 14px; color: #A098BC; margin: 0; }
+
+  /* ── CURSO CARD ── */
+  .curso-card {
+    background: var(--blanco);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 24px rgba(108,78,246,0.08);
+  }
+  .curso-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid #EAE8F5;
+  }
+  .curso-nivel-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .badge-n0 { background: #E8F5E9; color: #2E7D32; }
+  .badge-n1 { background: #FFF8E1; color: #F57F17; }
+  .badge-n2 { background: #E3F2FD; color: #1565C0; }
+  .badge-pbi1 { background: #EDE7F6; color: #4527A0; }
+  .badge-pbi2 { background: #FCE4EC; color: #880E4F; }
+  .badge-pbi3 { background: #1A1120; color: #A98EFF; }
+
+  .curso-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--noche);
+    margin: 0 0 6px 0;
+  }
+  .curso-header .tagline {
+    font-size: 15px;
+    color: var(--gris);
+    margin: 0;
+  }
+  .curso-body {
+    padding: 24px 32px;
+  }
+  .curso-intro {
+    font-size: 15px;
+    color: #4A4660;
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+  .lista-aprendizaje {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+  .lista-aprendizaje li {
+    font-size: 14px;
+    color: #3A3650;
+    padding: 7px 0 7px 24px;
+    position: relative;
+    border-bottom: 1px solid #F0EEF8;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .lista-aprendizaje li:last-child { border-bottom: none; }
+  .lista-aprendizaje li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--principal);
+    font-weight: 700;
+  }
+  .resultado-box {
+    background: var(--neblina);
+    border-left: 4px solid var(--principal);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+  }
+  .resultado-box p {
+    font-size: 14px;
+    color: var(--profundo);
+    font-weight: 500;
+    margin: 0;
+  }
+  .curso-footer {
+    background: #FAFAFE;
+    border-top: 1px solid #EAE8F5;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .detalles-curso { display: flex; gap: 24px; flex-wrap: wrap; }
+  .detalle-item { font-size: 13px; color: var(--gris); }
+  .detalle-item span { color: var(--noche); font-weight: 600; }
+  .precio-box { text-align: right; }
+  .precio-principal { font-size: 26px; font-weight: 700; color: var(--principal); }
+  .precio-cuota { font-size: 13px; color: var(--gris); }
+
+  /* ── DIVISOR CON HERRAMIENTA ── */
+  .divisor-herramienta {
+    text-align: center;
+    padding: 20px 0 36px;
+  }
+  .divisor-herramienta .tool-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(108,78,246,0.12);
+    border: 1px solid rgba(108,78,246,0.3);
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--acento);
+  }
+  .tool-desc {
+    max-width: 640px;
+    margin: 16px auto 0;
+    font-size: 15px;
+    color: #9090A8;
+    line-height: 1.7;
+  }
+
+  /* ── PROMOS ── */
+  .promo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+  .promo-card {
+    background: #2A1E3A;
+    border: 1px solid rgba(108,78,246,0.3);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .promo-card.destacada {
+    background: linear-gradient(135deg, #3D2880, #5038D4);
+    border-color: var(--acento);
+  }
+  .promo-card h4 { font-size: 18px; font-weight: 700; color: var(--blanco); margin-bottom: 8px; }
+  .promo-card .promo-desc { font-size: 14px; color: #B0A8CC; margin-bottom: 16px; }
+  .promo-card.destacada .promo-desc { color: #D4CAFF; }
+  .promo-precio-normal { font-size: 13px; color: #7A7090; text-decoration: line-through; margin-bottom: 4px; }
+  .promo-precio { font-size: 28px; font-weight: 700; color: var(--acento); }
+  .promo-ahorro { display: inline-block; background: rgba(108,78,246,0.2); color: var(--acento); font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-left: 8px; }
+  .promo-cuota { font-size: 13px; color: #9090A8; margin-top: 4px; }
+
+  /* ── PAGOS ── */
+  .pagos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .pago-card {
+    background: #2A1E3A;
+    border: 1px solid rgba(108,78,246,0.2);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .pago-icono { font-size: 28px; margin-bottom: 10px; }
+  .pago-nombre { font-size: 15px; font-weight: 600; color: var(--blanco); margin-bottom: 4px; }
+  .pago-detalle { font-size: 13px; color: #8080A0; }
+
+  /* ── PASOS ── */
+  .pasos { margin-top: 36px; }
+  .paso {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .paso-num {
+    width: 44px; height: 44px;
+    background: var(--principal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: var(--blanco);
+    flex-shrink: 0;
+  }
+  .paso-texto h4 { font-size: 16px; font-weight: 600; color: var(--noche); margin-bottom: 4px; }
+  .paso-texto p { font-size: 14px; color: #5A5470; margin: 0; }
+
+  /* ── CONTACTO ── */
+  .contacto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .contacto-item {
+    background: #2A1E3A;
+    border: 1px solid rgba(108,78,246,0.2);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .contacto-icono { font-size: 26px; margin-bottom: 10px; }
+  .contacto-label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--acento); margin-bottom: 6px; }
+  .contacto-valor { font-size: 15px; color: var(--blanco); font-weight: 500; }
+
+  /* ── CIERRE ── */
+  .cierre {
+    background: linear-gradient(135deg, #2D1F4A, #1A1120);
+    padding: 72px 48px;
+    text-align: center;
+    border-top: 1px solid rgba(108,78,246,0.3);
+  }
+  .cierre h2 {
+    font-size: 36px;
+    font-weight: 700;
+    max-width: 560px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #FFFFFF, #A98EFF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cierre p { color: #9090A8; font-size: 16px; }
+  .cierre .slogan-final { color: var(--acento); font-weight: 600; font-size: 18px; margin-top: 32px; }
+
+  /* ── INCLUDES BANNER ── */
+  .includes-banner {
+    background: rgba(108,78,246,0.08);
+    border: 1px solid rgba(108,78,246,0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .includes-banner span {
+    font-size: 13px;
+    color: #A098BC;
+  }
+  .includes-banner strong { color: var(--acento); }
+  .inc-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #B0A8CC;
+  }
+  .inc-item::before { content: '✓'; color: var(--principal); font-weight: 700; }
+
+  /* ── BOTÓN INSCRIBIR ── */
+  .btn-inscribir {
+    display: inline-block;
+    background: var(--principal);
+    color: var(--blanco);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .btn-inscribir:hover { background: var(--profundo); transform: translateY(-2px); }
+  .btn-inscribir-outline {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: var(--blanco);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s;
+    margin-top: 16px;
+  }
+  .btn-inscribir-outline:hover { background: rgba(255,255,255,0.2); }
+
+  /* ── COHORTE TAG ── */
+  .cohorte-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #6B6B7A;
+    margin-top: 6px;
+  }
+  .cohorte-tag .cupos { color: #C0392B; font-weight: 700; }
+
+  /* ── HERO BTNS ── */
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .btn-hero {
+    display: inline-block;
+    background: var(--principal);
+    color: var(--blanco);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-hero:hover { background: var(--profundo); transform: translateY(-2px); }
+  .btn-hero-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--acento);
+    border: 1.5px solid var(--acento);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-hero-outline:hover { background: rgba(169,142,255,0.1); }
+
+  /* ── BADGE DESTACADO ── */
+  .badge-mas-elegido {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #A98EFF;
+    margin-bottom: 10px;
+  }
+
+  /* ── WHATSAPP FLOTANTE ── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: #25D366;
+    color: white;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+    z-index: 999;
+    transition: transform 0.2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+
+  /* ── PRECIO CUOTAS LABEL ── */
+  .precio-cuotas-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gris);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  /* ── PROMO FULL WIDTH ── */
+  .promo-full { grid-column: span 2; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 48px 24px 64px; }
+    .hero h1 { font-size: 36px; }
+    .hero-desc { font-size: 15px; }
+    .hero-sub { font-size: 16px; }
+    .seccion { padding: 48px 24px; }
+    h2 { font-size: 26px; }
+    .grid-dif { grid-template-columns: 1fr 1fr; }
+    .herramientas-grid { grid-template-columns: 1fr; }
+    .promo-grid { grid-template-columns: 1fr; }
+    .promo-full { grid-column: span 1; }
+    .pagos-grid { grid-template-columns: 1fr; }
+    .contacto-grid { grid-template-columns: 1fr; }
+    .curso-footer { flex-direction: column; gap: 12px; }
+    .precio-box { text-align: left; }
+    .curso-header { padding: 22px 20px 16px; }
+    .curso-body { padding: 20px 20px; }
+    .curso-footer { padding: 16px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 28px; }
+    .grid-dif { grid-template-columns: 1fr; }
+    .includes-banner { flex-direction: column; gap: 8px; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section class="hero">
+  <div class="contenedor">
+    <img class="hero-logo" src="data:image/png;base64,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" alt="Katoda Logo">
+    <h1>katoda</h1>
+    <p class="hero-sub">Formación Aplicada en Analítica de Datos</p>
+    <p class="hero-slogan">Transformando con propósito.</p>
+    <p class="hero-desc">
+      Acá no aprendes botones.<br>
+      <strong>Aprendes a resolver problemas reales</strong> con herramientas que ya existen en tu computador.<br>
+      Cada clase tiene un caso concreto. Cada nivel tiene un resultado que puedes mostrar mañana en el trabajo.
+    </p>
+    <div class="hero-btns">
+      <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" class="btn-hero">Ver cursos disponibles →</a>
+      <a href="https://wa.me/56987625904?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20de%20Katoda" class="btn-hero-outline">💬 Hablar por WhatsApp</a>
+    </div>
+    <div class="grid-dif">
+      <div class="card-dif">
+        <div class="icono">🎯</div>
+        <h4>Aplicado desde el día uno</h4>
+        <p>Practicas con datos parecidos a los que usas en tu trabajo, no con ejemplos genéricos.</p>
+      </div>
+      <div class="card-dif">
+        <div class="icono">👥</div>
+        <h4>Grupos reducidos</h4>
+        <p>Puedes preguntar, equivocarte y avanzar a tu ritmo. Atención real, no masiva.</p>
+      </div>
+      <div class="card-dif">
+        <div class="icono">💬</div>
+        <h4>Soporte por WhatsApp</h4>
+        <p>Si te atascas entre clases, tienes dónde preguntar. No estás solo en el proceso.</p>
+      </div>
+      <div class="card-dif">
+        <div class="icono">🎬</div>
+        <h4>Clases grabadas</h4>
+        <p>Todas las sesiones quedan disponibles. Repasa cuando necesites.</p>
+      </div>
+      <div class="card-dif">
+        <div class="icono">💻</div>
+        <h4>Microsoft 365 incluido</h4>
+        <p>Trabajas desde el primer día en el entorno real de las herramientas. Sin complicaciones de instalación.</p>
+      </div>
+      <div class="card-dif">
+        <div class="icono">📁</div>
+        <h4>Material descargable</h4>
+        <p>Todo lo que se usa en clases queda en tus manos para seguir practicando.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ NAV TABS ══════════════════════ -->
+<nav class="nav-tabs" aria-label="Navegación">
+  <div class="nav-tabs-inner">
+    <a href="#herramientas" class="nav-tab">¿Qué aprenderás?</a>
+    <a href="#excel" class="nav-tab">📊 Excel</a>
+    <a href="#powerbi" class="nav-tab">📈 Power BI</a>
+    <a href="#combos" class="nav-tab">🎯 Combos y rutas</a>
+    <a href="#como-inscribirse" class="nav-tab">✅ Cómo inscribirse</a>
+    <a href="#contacto" class="nav-tab">💬 Contacto</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════ INTRO HERRAMIENTAS ══════════════════════ -->
+<section class="seccion seccion-oscura" id="herramientas">
+  <div class="contenedor">
+    <span class="label">¿Qué aprenderás?</span>
+    <h2>Excel y Power BI: las herramientas que usan las empresas</h2>
+    <p style="color:#9090A8;">Son las dos herramientas más usadas en el mundo laboral para trabajar con datos. Se complementan perfectamente — puedes tomar una, la otra, o las dos en secuencia.</p>
+
+    <div class="herramientas-grid">
+
+      <!-- Excel -->
+      <div class="herramienta-card">
+        <div class="herramienta-header excel-color">
+          <div class="herramienta-icono">📊</div>
+          <h3>Excel</h3>
+          <p class="herramienta-sub">Organiza, analiza y automatiza tus datos</p>
+        </div>
+        <div class="video-placeholder" id="video-excel" onclick="abrirVideo('excel')">
+          <div class="video-play">▶</div>
+          <div class="video-label">Video intro — próximamente</div>
+        </div>
+        <div class="herramienta-body">
+          <ul class="herramienta-lista">
+            <li>Ordenar y limpiar bases de datos de forma profesional</li>
+            <li>Cruzar información entre tablas sin copiar y pegar</li>
+            <li>Crear reportes automáticos con tablas dinámicas</li>
+            <li>Automatizar tareas repetitivas con Power Query</li>
+          </ul>
+          <div class="herramienta-para">
+            <strong>Ideal para:</strong> administración, RRHH, finanzas, operaciones — cualquier área que trabaja con planillas.
+          </div>
+        </div>
+      </div>
+
+      <!-- Power BI -->
+      <div class="herramienta-card">
+        <div class="herramienta-header pbi-color">
+          <div class="herramienta-icono">📈</div>
+          <h3>Power BI</h3>
+          <p class="herramienta-sub">Visualiza, conecta y presenta información</p>
+        </div>
+        <div class="video-placeholder" id="video-pbi" onclick="abrirVideo('pbi')">
+          <div class="video-play">▶</div>
+          <div class="video-label">Video intro — próximamente</div>
+        </div>
+        <div class="herramienta-body">
+          <ul class="herramienta-lista">
+            <li>Dashboards interactivos que se actualizan solos</li>
+            <li>Conectar múltiples fuentes de datos a la vez</li>
+            <li>KPIs e indicadores clave de negocio</li>
+            <li>Reportes que cualquier persona puede leer sin saber Excel</li>
+          </ul>
+          <div class="herramienta-para">
+            <strong>Ideal para:</strong> gerencias, análisis de negocio, industria, minería — cualquier área que necesita reportar hacia arriba.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ EXCEL ══════════════════════ -->
+<section class="seccion seccion-clara" id="excel">
+  <div class="contenedor">
+    <span class="label">Herramienta 01</span>
+    <h2>Cursos de Excel</h2>
+
+    <div class="divisor-herramienta">
+      <div class="tool-badge">📊 ¿Qué es Excel?</div>
+      <p class="tool-desc">Excel es la herramienta más usada en el trabajo para organizar información, hacer cálculos y generar reportes. Si alguna vez abriste un archivo lleno de números y no supiste por dónde empezar, estos cursos son para ti.</p>
+    </div>
+
+    <!-- Excel N0 -->
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-n0">Nivel 0</span>
+        <h3>Fundamentos: Ordena tus datos y entiende lo que tienes</h3>
+        <p class="tagline">Para quienes nunca han usado Excel o lo usan muy poco. Empezamos desde cero.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Antes de analizar, hay que saber estructurar. En este nivel aprendes a trabajar con datos de forma ordenada y con lógica, que es la base de todo lo demás.</p>
+        <div class="includes-banner">
+          <span class="inc-item">4 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>Cómo funciona Excel en un contexto laboral real: para qué sirve y cómo usarlo bien desde el inicio</li>
+          <li>Estructura correcta de una tabla: filas, columnas, tipos de datos (texto, número, fecha)</li>
+          <li>Formato de tabla profesional y por qué eso cambia todo</li>
+          <li>Filtros y ordenamiento: encontrar lo que necesitas en segundos</li>
+          <li>Limpieza básica: eliminar duplicados, corregir espacios y errores frecuentes</li>
+          <li>Fórmulas esenciales: SUMA, PROMEDIO, CONTAR aplicadas a casos reales</li>
+          <li>Referencias relativas y absolutas: el concepto que más confunde y más se necesita</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a poder tomar cualquier lista o base de datos desordenada y transformarla en algo limpio, ordenado y listo para analizar.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>4 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">6 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$28.000</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Excel%20N0%20(Fundamentos)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Excel N1 -->
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-n1">Nivel 1</span>
+        <h3>Intermedio: Analiza, busca y presenta información</h3>
+        <p class="tagline">Ya sabes ordenar datos. Ahora viene lo que realmente ahorra tiempo en el trabajo.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Fórmulas que toman decisiones solas, búsquedas entre tablas y tus primeros reportes visuales. Esto es lo que separa a quien usa Excel de quien lo domina.</p>
+        <div class="includes-banner">
+          <span class="inc-item">5 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>Función SI: automatiza decisiones como clasificar clientes, estados o categorías</li>
+          <li>BUSCARV y BUSCARX: conecta información de distintas tablas sin copiar y pegar</li>
+          <li>ÍNDICE + COINCIDIR: búsquedas más flexibles para datos complejos</li>
+          <li>Manejo de errores: cómo detectarlos y corregirlos para que tus reportes no fallen</li>
+          <li>Tablas dinámicas: resume miles de datos en segundos y responde preguntas reales</li>
+          <li>Segmentación de datos: filtra tu tabla dinámica de forma visual e interactiva</li>
+          <li>Tu primer dashboard en Excel: un reporte visual que comunica lo que importa</li>
+          <li>Buenas prácticas de estructura de datos para que todo funcione siempre</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a poder analizar información, cruzar datos de distintas fuentes y presentar resultados sin depender de nadie.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>5 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">5 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$35.000</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Excel%20N1%20(Intermedio)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Excel N2 -->
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-n2">Nivel 2</span>
+        <h3>Excel para BI: Automatiza y prepara tus datos para el siguiente nivel</h3>
+        <p class="tagline">Dejamos de hacer las cosas a mano. Un clic actualiza todo tu reporte mensual.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Este nivel es el puente entre Excel y Power BI. Aquí aprendes a automatizar lo que hoy haces repetidamente, y a preparar tus datos para construir dashboards profesionales.</p>
+        <div class="includes-banner">
+          <span class="inc-item">4 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>Power Query: automatiza la limpieza de datos — lo que antes hacías en 2 horas, en 2 minutos</li>
+          <li>Importar datos desde distintas fuentes y transformarlos automáticamente</li>
+          <li>Consolidación de archivos: une reportes de distintos meses sin copiar y pegar</li>
+          <li>Limpieza automatizada: corrección de tipos de datos y eliminación de errores</li>
+          <li>Modelo de datos básico: qué es una tabla de hechos y una dimensión, y por qué importa</li>
+          <li>Relaciones entre tablas de forma conceptual: base para entender Power BI sin frustrarse</li>
+          <li>Preparación de datos lista para importar a Power BI</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a poder automatizar reportes que hoy haces manualmente y estarás listo para Power BI sin complicaciones.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>4 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">6 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$31.500</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Excel%20N2%20(BI%20y%20Power%20Query)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ POWER BI ══════════════════════ -->
+<section class="seccion seccion-oscura" id="powerbi">
+  <div class="contenedor">
+    <span class="label">Herramienta 02</span>
+    <h2>Cursos de Power BI</h2>
+
+    <div class="divisor-herramienta">
+      <div class="tool-badge">📈 ¿Qué es Power BI?</div>
+      <p class="tool-desc" style="color:#8080A0;">Power BI es la herramienta de Microsoft para convertir datos en gráficos, dashboards e indicadores que te ayudan a entender qué está pasando en tu trabajo o negocio. Si alguna vez quisiste visualizar tus datos de forma clara y profesional, Power BI es el camino.</p>
+    </div>
+
+    <!-- PBI N1 -->
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-pbi1">Nivel 1 — Básico</span>
+        <h3>Conecta tus datos y crea tu primer dashboard</h3>
+        <p class="tagline">Empezamos desde cero. No necesitas saber nada de Power BI para entrar.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Al final de este nivel vas a tener un dashboard real funcionando, construido con tus propios datos. Sin teoría de más. Sin rodeos.</p>
+        <div class="includes-banner">
+          <span class="inc-item">4 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>Qué es Power BI, para qué sirve y cómo se diferencia de Excel</li>
+          <li>Conectar un archivo Excel a Power BI sin complicaciones</li>
+          <li>Power Query en Power BI: limpia y transforma tus datos antes de visualizarlos</li>
+          <li>Modelo de datos básico: cómo organizar bien la información antes de graficar</li>
+          <li>Creación de visualizaciones: gráficos de barras, líneas, tarjetas y tablas</li>
+          <li>Filtros y segmentadores: cómo hacer que tu dashboard sea interactivo</li>
+          <li>Publicación básica: cómo compartir tu reporte con otros</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a tener un dashboard funcional que puedes mostrar en tu trabajo, construido con datos reales desde el primer día.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>4 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">4 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$31.500</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Power%20BI%20N1%20(B%C3%A1sico)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PBI N2 -->
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-pbi2">Nivel 2 — Intermedio</span>
+        <h3>Dashboards profesionales con lógica de negocio</h3>
+        <p class="tagline">Acá es donde Power BI empieza a tener sentido real para las empresas.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Aprenderás a modelar datos correctamente y a crear medidas que responden preguntas de negocio, no solo suman columnas. Esto es lo que se usa en empresas.</p>
+        <div class="includes-banner">
+          <span class="inc-item">4 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>Modelamiento de datos correcto: la diferencia entre un dashboard que funciona y uno que falla</li>
+          <li>Relaciones entre tablas y cardinalidad: conectar fuentes distintas sin errores</li>
+          <li>Introducción a DAX: el lenguaje de cálculo de Power BI explicado desde cero</li>
+          <li>Medidas básicas: SUM, CALCULATE, SUMX aplicadas a casos reales de trabajo</li>
+          <li>KPIs e indicadores clave: cómo definirlos y visualizarlos correctamente</li>
+          <li>Diseño de dashboards con criterio: cada visual debe responder una pregunta</li>
+          <li>Buenas prácticas y errores comunes en dashboards reales</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a poder construir un dashboard profesional con lógica de negocio real, del tipo que se usa en empresas.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>4 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">6 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$38.500</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Power%20BI%20N2%20(Intermedio)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PBI N3 -->
+
+    <div class="curso-card">
+      <div class="curso-header">
+        <span class="curso-nivel-badge badge-pbi3">Nivel 3 — Avanzado</span>
+        <h3>Soluciones completas de negocio</h3>
+        <p class="tagline">Para quienes ya dominan lo básico y quieren ir al nivel experto.</p>
+      </div>
+      <div class="curso-body">
+        <p class="curso-intro">Este nivel es especialmente potente para personas que trabajan en industria, operaciones o minería. Los casos están diseñados desde esa realidad y el objetivo es que puedas entregar soluciones completas, no solo dashboards.</p>
+        <div class="includes-banner">
+          <span class="inc-item">4 clases de 90 min</span>
+          <span class="inc-item">Material descargable</span>
+          <span class="inc-item">Grabaciones</span>
+          <span class="inc-item">Soporte WhatsApp</span>
+          <span class="inc-item">Microsoft 365 por 2 meses</span>
+        </div>
+        <ul class="lista-aprendizaje">
+          <li>DAX avanzado: variables, ALL, FILTER y funciones de inteligencia de tiempo</li>
+          <li>Optimización de modelos: reportes que cargan rápido aunque tengan miles de datos</li>
+          <li>Performance: detectar cuellos de botella y corregirlos</li>
+          <li>Power Automate integrado: automatiza el envío de reportes sin intervención manual</li>
+          <li>Gobierno de datos: conceptos clave para publicar en entornos organizacionales</li>
+          <li>Caso real de industria u operaciones: construyes una solución completa desde cero</li>
+        </ul>
+        <div class="resultado-box">
+          <p>✦ Al terminar: vas a poder entregar soluciones completas de análisis para tu empresa. No solo dashboards bonitos.</p>
+        </div>
+      </div>
+      <div class="curso-footer">
+        <div class="detalles-curso">
+          <div class="detalle-item">Clases: <span>4 × 90 min</span></div>
+          <div class="detalle-item">Modalidad: <span>En vivo online</span></div>
+          <div class="detalle-item">Requisito: <span>Power BI N1 + N2 o experiencia equivalente</span></div>
+          <div class="cohorte-tag">🗓 Próxima fecha: junio · <span class="cupos">5 cupos disponibles</span></div>
+        </div>
+        <div class="precio-box">
+          <div class="precio-cuotas-label">3 cuotas de</div>
+          <div class="precio-principal">$42.000</div>
+          <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20inscribirme%20en%20Power%20BI%20N3%20(Avanzado)" class="btn-inscribir">Inscribirme →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ PROMOS ══════════════════════ -->
+<section class="seccion seccion-clara" id="combos">
+  <div class="contenedor">
+    <span class="label">Promociones</span>
+    <h2>Combos y rutas</h2>
+    <p>Si quieres avanzar más rápido, elige un combo de dos niveles o una ruta completa. Todos tienen descuento respecto a los precios individuales.</p>
+
+    <h3>Combos — dos niveles</h3>
+    <div class="promo-grid">
+      <div class="promo-card">
+        <h4>📊 Excel N0 + N1</h4>
+        <p class="promo-desc">De cero a analista en Excel. Fundamentos, análisis, búsquedas y tu primer dashboard.</p>
+        <div class="promo-precio-normal">Comprando por separado: $188.800</div>
+        <div class="promo-precio">$160.500 <span class="promo-ahorro">Ahorras $28.300</span></div>
+        <div class="promo-cuota">3 cuotas de $53.500</div>
+      </div>
+      <div class="promo-card">
+        <h4>📊 Excel N1 + N2</h4>
+        <p class="promo-desc">Análisis avanzado más automatización con Power Query. El salto que más cambia tu trabajo.</p>
+        <div class="promo-precio-normal">Comprando por separado: $199.300</div>
+        <div class="promo-precio">$170.000 <span class="promo-ahorro">Ahorras $29.300</span></div>
+        <div class="promo-cuota">3 cuotas de $56.700</div>
+      </div>
+      <div class="promo-card promo-full destacada">
+        <div class="badge-mas-elegido">⭐ Combo más elegido</div>
+        <h4>🔗 Excel N2 + Power BI N1</h4>
+        <p class="promo-desc" style="color:#D4CAFF;">El puente perfecto: automatiza en Excel y visualiza en Power BI. Tus datos, listos para el siguiente nivel desde el primer día.</p>
+        <div class="promo-precio-normal">Comprando por separado: $188.800</div>
+        <div class="promo-precio">$160.500 <span class="promo-ahorro">Ahorras $28.300</span></div>
+        <div class="promo-cuota">3 cuotas de $53.500</div>
+        <a href="https://wa.me/56987625904?text=Hola%21%20Me%20interesa%20el%20combo%20Excel%20N2%20%2B%20Power%20BI%20N1" class="btn-inscribir-outline">Quiero este combo →</a>
+      </div>
+      <div class="promo-card">
+        <h4>📈 Power BI N1 + N2</h4>
+        <p class="promo-desc">De tu primer dashboard a dashboards con lógica de negocio real, DAX y KPIs que responden preguntas concretas.</p>
+        <div class="promo-precio-normal">Comprando por separado: $209.800</div>
+        <div class="promo-precio">$178.400 <span class="promo-ahorro">Ahorras $31.400</span></div>
+        <div class="promo-cuota">3 cuotas de $59.500</div>
+      </div>
+      <div class="promo-card">
+        <h4>📈 Power BI N2 + N3</h4>
+        <p class="promo-desc">Desde dashboards profesionales hasta soluciones completas. DAX avanzado, optimización y automatización con Power Automate.</p>
+        <div class="promo-precio-normal">Comprando por separado: $241.300</div>
+        <div class="promo-precio">$205.700 <span class="promo-ahorro">Ahorras $35.600</span></div>
+        <div class="promo-cuota">3 cuotas de $68.600</div>
+      </div>
+    </div>
+
+    <h3>Rutas completas</h3>
+    <div class="promo-grid">
+      <div class="promo-card">
+        <h4>📊 Ruta Completa Excel</h4>
+        <p class="promo-desc">Los 3 niveles de Excel. De cero a automatización total con Power Query.</p>
+        <div class="promo-precio-normal">Comprando por separado: $283.200</div>
+        <div class="promo-precio">$241.400 <span class="promo-ahorro">Ahorras $41.800</span></div>
+        <div class="promo-cuota">3 cuotas de $80.500</div>
+      </div>
+      <div class="promo-card">
+        <h4>📈 Ruta Completa Power BI</h4>
+        <p class="promo-desc">Los 3 niveles de Power BI. De cero a nivel experto en dashboards y DAX.</p>
+        <div class="promo-precio-normal">Comprando por separado: $335.700</div>
+        <div class="promo-precio">$283.400 <span class="promo-ahorro">Ahorras $52.300</span></div>
+        <div class="promo-cuota">3 cuotas de $94.500</div>
+      </div>
+      <div class="promo-card promo-full">
+        <h4>👥 Promo Referido — Inscribite con un amigo</h4>
+        <p class="promo-desc">Si te inscribes junto a otra persona al mismo curso, ambos obtienen un descuento directo. Solo hay que avisarlo al momento de inscribirse.</p>
+        <div class="promo-precio">$10.000 de descuento <span class="promo-ahorro">para cada uno</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ PAGOS ══════════════════════ -->
+<section class="seccion seccion-oscura">
+  <div class="contenedor">
+    <span class="label">Medio de pago</span>
+    <h2>Pagos vía Mercado Pago</h2>
+    <p style="color:#9090A8;">Todas las inscripciones se procesan a través de Mercado Pago. Puedes pagar al contado o en hasta 3 cuotas con tarjeta de crédito.</p>
+    <div style="max-width:380px; margin:32px auto 0;">
+      <div class="pago-card" style="text-align:center;">
+        <div class="pago-icono">🛒</div>
+        <div class="pago-nombre">Mercado Pago</div>
+        <div class="pago-detalle">
+          Pago al contado · Hasta 3 cuotas<br>
+          Tarjetas crédito y débito · Efectivo · Cuenta MP
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ INSCRIPCIÓN ══════════════════════ -->
+<section class="seccion seccion-clara" id="como-inscribirse">
+  <div class="contenedor">
+    <span class="label">Cómo inscribirse</span>
+    <h2>Cuatro pasos. Sin complicaciones.</h2>
+    <div class="pasos">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <div class="paso-texto">
+          <h4>Completa el formulario de interés</h4>
+          <p>Cuéntanos en qué herramienta te quieres enfocar y cuál es tu nivel actual. Toma menos de 2 minutos. <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" style="color:#6C4EF6;font-weight:600;">Ir al formulario →</a></p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <div class="paso-texto">
+          <h4>Te contactamos por WhatsApp</h4>
+          <p>Te orientamos al nivel que mejor se ajusta a ti y respondemos cualquier duda antes de que te inscribas.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <div class="paso-texto">
+          <h4>Confirmas y pagas</h4>
+          <p>Elige el medio de pago que prefieras. Puedes pagar en hasta 3 cuotas.</p>
+        </div>
+      </div>
+      <div class="paso">
+        <div class="paso-num">4</div>
+        <div class="paso-texto">
+          <h4>Recibes todo antes de empezar</h4>
+          <p>Acceso a Microsoft 365, material del curso e información de las clases. Listo para el día uno.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CONTACTO ══════════════════════ -->
+<section class="seccion seccion-oscura" id="contacto">
+  <div class="contenedor">
+    <span class="label">Contacto</span>
+    <h2>¿Tienes dudas? Escríbenos.</h2>
+    <p style="color:#9090A8;">Estamos disponibles por WhatsApp, correo e Instagram. Sin formalismos.</p>
+    <div class="contacto-grid">
+      <div class="contacto-item">
+        <div class="contacto-icono">💬</div>
+        <div class="contacto-label">WhatsApp</div>
+        <div class="contacto-valor">+56 9 8762 5904</div>
+      </div>
+      <div class="contacto-item">
+        <div class="contacto-icono">✉️</div>
+        <div class="contacto-label">Correo</div>
+        <div class="contacto-valor">katoda.contacto@gmail.com</div>
+      </div>
+      <div class="contacto-item">
+        <div class="contacto-icono">📸</div>
+        <div class="contacto-label">Instagram</div>
+        <div class="contacto-valor"><a href="https://www.instagram.com/katoda.cl" style="color:#A98EFF;text-decoration:none;">@katoda.cl</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════ CIERRE ══════════════════════ -->
+<section class="cierre">
+  <div class="contenedor">
+    <h2>Aprende haciendo.<br>Aplica desde el primer día.</h2>
+    <p>Cada clase tiene un caso concreto. Cada nivel tiene un resultado.<br>Y al final, tienes algo que usas mañana en tu trabajo.</p>
+    <p class="slogan-final">katoda — Transformando con propósito.</p>
+    <p style="margin-top:24px;"><a href="https://forms.gle/Ddz5AdKrKgrMU3F29" style="display:inline-block;background:#6C4EF6;color:#fff;padding:14px 32px;border-radius:40px;font-weight:600;font-size:16px;text-decoration:none;margin-top:8px;">Completar formulario de interés →</a></p>
+  </div>
+</section>
+
+<script>
+  // ── Scroll spy para pestañas activas ──
+  const tabs = document.querySelectorAll('.nav-tab');
+  const secciones = ['herramientas','excel','powerbi','combos','como-inscribirse','contacto']
+    .map(id => document.getElementById(id)).filter(Boolean);
+
+  function actualizarTab() {
+    let actual = '';
+    secciones.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 80) actual = sec.id;
+    });
+    tabs.forEach(tab => {
+      const href = tab.getAttribute('href').replace('#','');
+      tab.classList.toggle('activo', href === actual);
+    });
+  }
+  window.addEventListener('scroll', actualizarTab, { passive: true });
+  actualizarTab();
+
+  // ── Placeholder videos (reemplazar URL cuando estén listos) ──
+  const urlVideos = {
+    excel: '', // pega aquí la URL de YouTube de Excel
+    pbi:   ''  // pega aquí la URL de YouTube de Power BI
+  };
+  function abrirVideo(tipo) {
+    const url = urlVideos[tipo];
+    if (url) window.open(url, '_blank');
+  }
+</script>
+
+<!-- ══════════════════════ WHATSAPP FLOTANTE ══════════════════════ -->
+<a href="https://wa.me/56987625904?text=Hola%21%20Quiero%20saber%20m%C3%A1s%20sobre%20los%20cursos%20de%20Katoda" class="wa-float" title="Hablar por WhatsApp">💬</a>
+
+</body>
+</html>
