@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asesorías | Katoda</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    :root{
+      --navy:#1A1120;
+      --navy-mid:#231530;
+      --copper:#6C4EF6;
+      --copper-light:#A98EFF;
+      --text:#FFFFFF;
+      --soft:rgba(255,255,255,0.65);
+    }
+
+    body{
+      font-family:Arial, sans-serif;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top right, rgba(108,78,246,0.12), transparent 30%),
+        linear-gradient(150deg,#130D1A 0%,#1E1228 60%,#2D1F3D 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:white;
+      text-align:center;
+      padding:40px;
+      position:relative;
+    }
+
+    body::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size:40px 40px;
+    }
+
+    .contenedor{
+      max-width:760px;
+      position:relative;
+      z-index:1;
+    }
+
+    .logo{
+      margin-bottom:40px;
+    }
+
+    .logo img{
+      width:220px;
+      max-width:80%;
+    }
+
+    h1{
+      font-size:clamp(42px,6vw,68px);
+      margin-bottom:20px;
+      letter-spacing:-2px;
+      font-weight:800;
+    }
+
+    p{
+      font-size:20px;
+      line-height:1.8;
+      color:var(--soft);
+      max-width:620px;
+      margin:0 auto;
+    }
+
+    .tag{
+      margin-top:32px;
+      color:var(--copper-light);
+      font-size:13px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .boton{
+      display:inline-block;
+      margin-top:50px;
+      padding:16px 32px;
+      border-radius:14px;
+      text-decoration:none;
+      color:white;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.04);
+      transition:0.3s;
+      font-weight:600;
+    }
+
+    .boton:hover{
+      background:rgba(108,78,246,0.18);
+      border-color:rgba(108,78,246,0.35);
+      transform:translateY(-3px);
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="contenedor">
+
+    <div class="logo">
+      <img src="SET/katoda-logo-blanco.svg" alt="Katoda">
+    </div>
+
+    <h1>Asesorías</h1>
+
+    <p>
+      Próximamente estaremos lanzando servicios digitales y soluciones
+      para perfiles profesionales, emprendimientos y pymes.
+    </p>
+
+    <div class="tag">
+      LinkedIn • CV • Canva • Automatización • Dashboards
+    </div>
+
+    <a class="boton" href="index.html">
+      Volver al inicio
+    </a>
+
+  </div>
+
+</body>
+</html>
