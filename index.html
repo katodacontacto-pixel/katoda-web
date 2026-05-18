@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
+<!-- CONFIGURACIÓN GENERAL DE LA PÁGINA -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- TÍTULO QUE APARECE EN LA PESTAÑA -->
 <title>Katoda</title>
 
 <style>
+
+/* ===================================================== */
+/* RESETEO GENERAL */
+/* Elimina márgenes automáticos del navegador */
+/* ===================================================== */
 
 *{
 margin:0;
@@ -14,31 +23,67 @@ padding:0;
 box-sizing:border-box;
 }
 
+/* ===================================================== */
+/* ESTILO GENERAL DEL BODY */
+/* Fondo principal + centrado total */
+/* ===================================================== */
+
 body{
+
+/* Tipografía */
 font-family:Arial, sans-serif;
+
+/* Fondo degradado */
 background:
 radial-gradient(circle at top right, rgba(108,78,246,0.15), transparent 30%),
 linear-gradient(150deg,#130D1A 0%,#1E1228 60%,#2D1F3D 100%);
+
+/* Altura completa pantalla */
 min-height:100vh;
+
+/* Centrado horizontal y vertical */
 display:flex;
 align-items:center;
 justify-content:center;
+
+/* Evita scroll raro */
 overflow:hidden;
+
+/* Color texto */
 color:white;
+
+/* Centra textos */
 text-align:center;
+
+/* Espaciado interno */
 padding:40px;
+
+/* Necesario para capas visuales */
 position:relative;
 }
 
+/* ===================================================== */
+/* GRID VISUAL DEL FONDO */
+/* Las líneas suaves tipo tecnológica */
+/* ===================================================== */
+
 body::before{
+
 content:'';
 position:absolute;
 inset:0;
+
 background-image:
 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+
 background-size:40px 40px;
 }
+
+/* ===================================================== */
+/* CONTENEDOR CENTRAL */
+/* Mantiene todo ordenado y centrado */
+/* ===================================================== */
 
 .contenedor{
 max-width:900px;
@@ -46,65 +91,153 @@ position:relative;
 z-index:1;
 }
 
+/* ===================================================== */
+/* BLOQUE DEL LOGO */
+/* ===================================================== */
+
 .logo{
 margin-bottom:40px;
 }
 
+/* ===================================================== */
+/* IMAGEN DEL LOGO */
+/* ===================================================== */
+
 .logo img{
+
+/* Tamaño logo */
 width:260px;
+
+/* Evita que se rompa en celular */
 max-width:80%;
 }
 
+/* ===================================================== */
+/* TÍTULO PRINCIPAL */
+/* ===================================================== */
+
 h1{
+
+/* Tamaño adaptable */
 font-size:clamp(40px,6vw,70px);
+
 margin-bottom:20px;
+
 font-weight:800;
+
+/* Letras más compactas */
 letter-spacing:-2px;
 }
 
+/* ===================================================== */
+/* TEXTO DESCRIPTIVO */
+/* ===================================================== */
+
 p{
+
 font-size:20px;
+
 line-height:1.8;
+
+/* Blanco suave */
 color:rgba(255,255,255,0.65);
+
 max-width:700px;
+
+/* Centrado automático */
 margin:0 auto 50px;
 }
 
+/* ===================================================== */
+/* CONTENEDOR DE BOTONES */
+/* ===================================================== */
+
 .botones{
+
 display:flex;
+
+/* Separación entre botones */
 gap:24px;
+
 justify-content:center;
+
+/* Permite bajar en celular */
 flex-wrap:wrap;
 }
 
+/* ===================================================== */
+/* BOTONES PRINCIPALES */
+/* ===================================================== */
+
 .boton{
+
 display:inline-flex;
+
 align-items:center;
 justify-content:center;
+
+/* Tamaño mínimo */
 min-width:220px;
+
+/* Espaciado interno */
 padding:22px 34px;
+
+/* Bordes redondeados */
 border-radius:18px;
+
+/* Quita subrayado */
 text-decoration:none;
+
 color:white;
+
 font-size:20px;
 font-weight:700;
+
+/* Fondo glassmorphism */
 background:rgba(255,255,255,0.05);
+
+/* Borde suave */
 border:1px solid rgba(255,255,255,0.10);
+
+/* Animación suave */
 transition:0.3s;
+
+/* Efecto vidrio */
 backdrop-filter:blur(10px);
 }
 
+/* ===================================================== */
+/* EFECTO HOVER */
+/* Cuando pasas el mouse */
+/* ===================================================== */
+
 .boton:hover{
+
+/* Se eleva */
 transform:translateY(-5px);
+
+/* Cambia color */
 background:rgba(108,78,246,0.18);
+
 border-color:rgba(108,78,246,0.35);
 }
 
+/* ===================================================== */
+/* TEXTO INFERIOR */
+/* ===================================================== */
+
 .tag{
+
 margin-top:40px;
+
 font-size:13px;
+
+/* Espaciado letras */
 letter-spacing:2px;
+
 text-transform:uppercase;
+
+/* Morado suave */
 color:#A98EFF;
 }
 
@@ -113,30 +246,44 @@ color:#A98EFF;
 
 <body>
 
+<!-- ===================================================== -->
+<!-- CONTENEDOR PRINCIPAL -->
+<!-- ===================================================== -->
+
 <div class="contenedor">
 
+<!-- LOGO -->
 <div class="logo">
-<img src="SET/katoda-logo-blanco.svg" alt="Katoda">
+
+<!-- AQUÍ VA TU LOGO -->
+<img src="katoda-transparente.png" alt="Katoda">
+
 </div>
 
+<!-- TÍTULO -->
 <h1>Katoda</h1>
 
+<!-- DESCRIPCIÓN -->
 <p>
 Formación aplicada y soluciones digitales para potenciar habilidades, procesos y negocios.
 </p>
 
+<!-- BOTONES -->
 <div class="botones">
 
+<!-- BOTÓN CURSOS -->
 <a class="boton" href="cursos.html">
 Cursos
 </a>
 
+<!-- BOTÓN ASESORÍAS -->
 <a class="boton" href="asesorias.html">
 Asesorías
 </a>
 
 </div>
 
+<!-- TEXTO INFERIOR -->
 <div class="tag">
 Excel • Power BI • Automatización • Datos • Digitalización
 </div>
