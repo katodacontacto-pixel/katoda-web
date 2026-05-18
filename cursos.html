@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katoda — Formación Aplicada en Analítica de Datos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #1A1120;
+      --navy-mid:    #231530;
+      --navy-light:  #2D1F3D;
+      --copper:      #6C4EF6;
+      --copper-l:    #8A6EF8;
+      --copper-xl:   #A98EFF;
+      --copper-pale: #EDE9FF;
+      --copper-bg:   #F3F0FF;
+      --bg:          #F5F4FB;
+      --white:       #FFFFFF;
+      --gray-light:  #E8E4FF;
+      --gray-mid:    #C5C0E0;
+      --gray-text:   #6B6B7A;
+      --text:        #1A1120;
+      --text-soft:   #4A4060;
+      --excel-green: #217346;
+      --excel-light: #EAF4EE;
+      --pbi-gold:    #D4A017;
+      --pbi-bg:      #FFF9E6;
+      --success:     #2E7D32;
+      --success-bg:  #E8F5E9;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ══ NAV ══════════════════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 17, 32, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(108, 78, 246, 0.18);
+    }
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 18px 10px 0;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      margin-right: 6px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+    .nav a {
+      padding: 15px 13px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav a:hover, .nav a.active {
+      color: white;
+      border-bottom-color: var(--copper);
+    }
+
+    /* ══ HERO ═════════════════════════════════════════════════ */
+    .hero {
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse at 15% 60%, rgba(108,78,246,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(45,31,61,0.9) 0%, transparent 55%),
+        linear-gradient(150deg, #130D1A 0%, #1E1228 60%, #2D1F3D 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 24px 70px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 36px 36px;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute;
+      bottom: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,78,246,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .hero-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+    .hero-tagline-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--copper-xl);
+      background: rgba(108,78,246,0.14);
+      border: 1px solid rgba(108,78,246,0.28);
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(28px, 4.5vw, 46px);
+      font-weight: 800;
+      color: white;
+      line-height: 1.18;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+      max-width: 720px;
+    }
+    .hero h1 em {
+      color: var(--copper);
+      font-style: normal;
+      display: block;
+    }
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 38px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.88);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 40px;
+      white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .chip:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .chip.copper {
+      background: rgba(108,78,246,0.18);
+      border-color: rgba(108,78,246,0.35);
+      color: #C4B5FD;
+    }
+
+    /* ══ SECCIÓN GENÉRICA ═════════════════════════════════════ */
+    section { padding: 64px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--copper);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px; height: 2px;
+      background: var(--copper);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--text-soft);
+      max-width: 640px;
+      line-height: 1.75;
+      margin-bottom: 44px;
+    }
+
+    /* ══ POR QUÉ KATODA ═══════════════════════════════════════ */
+    .porque-sec {
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse at 90% 80%, rgba(108,78,246,0.08) 0%, transparent 50%),
+        linear-gradient(150deg, #130D1A 0%, #231530 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .porque-sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .porque-sec .section-inner { position: relative; z-index: 1; }
+    .porque-sec .section-title { color: white; }
+    .porque-sec .section-subtitle { color: rgba(255,255,255,0.55); }
+    .porque-sec .section-label { color: var(--copper-xl); }
+    .porque-sec .section-label::before { background: var(--copper-xl); }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .benefit-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+      padding: 24px 18px 20px;
+      transition: all 0.25s;
+    }
+    .benefit-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(108,78,246,0.28);
+      transform: translateY(-3px);
+    }
+    .benefit-icon {
+      width: 42px; height: 42px;
+      background: rgba(108,78,246,0.14);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(108,78,246,0.20);
+    }
+    .benefit-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+    .benefit-desc {
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+    }
+
+    /* ══ HERRAMIENTA TAG ══════════════════════════════════════ */
+    .tool-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px 5px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .tool-tag.excel {
+      background: var(--excel-light);
+      color: var(--excel-green);
+      border: 1px solid rgba(33,115,70,0.18);
+    }
+    .tool-tag.pbi {
+      background: var(--pbi-bg);
+      color: var(--pbi-gold);
+      border: 1px solid rgba(212,160,23,0.28);
+    }
+
+    /* ══ CURSOS ═══════════════════════════════════════════════ */
+    .cursos-excel-sec { background: var(--white); }
+    .cursos-pbi-sec   { background: var(--bg); }
+
+    .route-cards { display: flex; flex-direction: column; gap: 0; }
+
+    .course-card {
+      background: var(--white);
+      border: 1px solid var(--gray-light);
+      border-radius: 14px;
+      padding: 24px 26px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+    }
+    .course-card:hover {
+      border-color: var(--copper);
+      box-shadow: 0 6px 28px rgba(108,78,246,0.14);
+      transform: translateY(-2px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .course-level {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .lv0       { background: #E8F5E9; color: #2E7D32; }
+    .lv1-excel { background: #FFF8E1; color: #E65100; }
+    .lv2-excel { background: #E3F2FD; color: #1565C0; }
+    .lv1-pbi   { background: #EDE7F6; color: #4527A0; }
+    .lv2-pbi   { background: #FCE4EC; color: #880E4F; }
+    .lv3-pbi   { background: #E8E4FF; color: #3700B3; }
+
+    .course-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 7px;
+      line-height: 1.3;
+    }
+    .course-desc {
+      font-size: 13.5px;
+      color: var(--text-soft);
+      line-height: 1.65;
+    }
+
+    .course-price {
+      text-align: right;
+      flex-shrink: 0;
+      min-width: 135px;
+    }
+    .price-label {
+      font-size: 10px;
+      color: var(--gray-text);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .price-cuota {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--copper);
+      line-height: 1.1;
+    }
+    .price-total {
+      font-size: 11.5px;
+      color: var(--gray-text);
+      margin-top: 4px;
+    }
+
+    .level-connector {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 20px;
+      color: var(--copper);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    /* ══ POWER BI FLOW ════════════════════════════════════════ */
+    .pbi-flow-wrap {
+      background: var(--navy);
+      border-radius: 14px;
+      padding: 24px 28px 20px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(108,78,246,0.20);
+      position: relative;
+      overflow: hidden;
+    }
+    .pbi-flow-wrap::after {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,78,246,0.10) 0%, transparent 70%);
+    }
+    .pbi-flow-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--copper-xl);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pbi-flow-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .pbi-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .pbi-flow::-webkit-scrollbar { display: none; }
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      flex: 1;
+      min-width: 72px;
+      padding: 4px 6px;
+    }
+    .flow-node-icon {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+    }
+    .flow-node-label {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      line-height: 1.35;
+    }
+    .flow-arrow {
+      font-size: 13px;
+      color: var(--copper);
+      flex-shrink: 0;
+      padding: 0 2px;
+      margin-bottom: 18px;
+      opacity: 0.85;
+    }
+
+    /* ══ PBI SPECIAL ══════════════════════════════════════════ */
+    .pbi-special {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 14px;
+      padding: 30px;
+      margin-top: 28px;
+      border: 1px solid rgba(108,78,246,0.22);
+      position: relative;
+      overflow: hidden;
+    }
+    .pbi-special::before {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,78,246,0.10) 0%, transparent 70%);
+    }
+    .pbi-special-inner { position: relative; z-index: 1; }
+    .pbi-special-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(108,78,246,0.20);
+      border: 1px solid rgba(108,78,246,0.30);
+      color: var(--copper-xl);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .pbi-special-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .pbi-special-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      max-width: 620px;
+    }
+    .pbi-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pbi-feat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.11);
+      color: rgba(255,255,255,0.82);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 13px;
+      border-radius: 40px;
+    }
+
+    /* ══ RUTA RECOMENDADA ═════════════════════════════════════ */
+    .ruta-sec {
+      background: var(--copper-bg);
+      border-top: 3px solid var(--copper);
+      border-bottom: 3px solid var(--copper);
+    }
+
+    .ruta-card {
+      background: var(--white);
+      border: 2px solid var(--copper);
+      border-radius: 18px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: 0 12px 48px rgba(108,78,246,0.14);
+    }
+    .ruta-card::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,78,246,0.08) 0%, transparent 70%);
+    }
+    .ruta-card-inner { position: relative; z-index: 1; }
+    .ruta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--copper);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 40px;
+      margin-bottom: 18px;
+    }
+    .ruta-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .ruta-name strong { color: var(--copper); font-weight: 800; }
+    .ruta-desc {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+    .ruta-courses {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .ruta-pill {
+      background: var(--copper-pale);
+      border: 1.5px solid rgba(108,78,246,0.28);
+      color: var(--copper);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 8px;
+    }
+    .ruta-plus { font-size: 20px; font-weight: 700; color: var(--copper); }
+    .ruta-divider { width: 100%; height: 1px; background: var(--gray-light); margin-bottom: 24px; }
+    .ruta-pricing {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .ruta-cuota-label { font-size: 11px; color: var(--gray-text); font-weight: 500; margin-bottom: 3px; }
+    .ruta-cuota-val {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--copper);
+      line-height: 1;
+    }
+    .ruta-total { font-size: 13px; color: var(--gray-text); margin-top: 5px; }
+    .ruta-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 40px;
+      border: 1px solid rgba(46,125,50,0.18);
+      margin-left: auto;
+    }
+
+    /* ══ COMBOS TABLE ═════════════════════════════════════════ */
+    .combos-sec { background: var(--white); }
+
+    .combo-table-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--gray-light);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .combo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    .combo-table thead th {
+      background: var(--navy);
+      color: white;
+      font-weight: 600;
+      font-size: 11.5px;
+      padding: 13px 16px;
+      text-align: left;
+      letter-spacing: 0.3px;
+    }
+    .combo-table tbody tr { transition: background 0.15s; }
+    .combo-table tbody tr:nth-child(even) { background: var(--bg); }
+    .combo-table tbody tr:hover { background: var(--copper-bg); }
+    .combo-table tbody tr.dest-row { background: var(--copper-pale) !important; }
+    .combo-table tbody tr.dest-row td:first-child { border-left: 3px solid var(--copper); }
+    .combo-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--gray-light);
+      vertical-align: middle;
+    }
+    .combo-table tr:last-child td { border-bottom: none; }
+    .combo-name { font-weight: 600; color: var(--navy); }
+    .combo-desc { font-size: 12px; color: var(--gray-text); margin-top: 2px; }
+    .combo-price {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      color: var(--copper);
+      font-size: 15px;
+      white-space: nowrap;
+    }
+    .combo-cuota { color: var(--text-soft); font-size: 12.5px; white-space: nowrap; }
+    .combo-save { font-weight: 700; color: var(--success); font-size: 12.5px; white-space: nowrap; }
+    .star-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 9.5px;
+      background: var(--copper);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 40px;
+      margin-left: 6px;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+    .combo-note { font-size: 12px; color: var(--gray-text); margin-top: 14px; text-align: right; font-style: italic; }
+
+    /* ══ CTA FINAL ════════════════════════════════════════════ */
+    .cta-sec {
+      background: var(--navy);
+      background-image:
+        radial-gradient(ellipse at 85% 20%, rgba(108,78,246,0.10) 0%, transparent 50%),
+        linear-gradient(150deg, #130D1A 0%, #231530 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-sec::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .cta-sec .section-inner { position: relative; z-index: 1; }
+    .cta-sec .section-title { color: white; }
+    .cta-sec .section-subtitle { color: rgba(255,255,255,0.6); }
+    .cta-sec .section-label { color: var(--copper-xl); }
+    .cta-sec .section-label::before { background: var(--copper-xl); }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--copper);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 15px 34px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      background: var(--copper-l);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(108,78,246,0.38);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      padding: 18px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(108,78,246,0.25);
+    }
+    .contact-lbl {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--copper-xl);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .contact-val {
+      font-size: 13px;
+      color: white;
+      text-decoration: none;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    .contact-val:hover { color: var(--copper-xl); text-decoration: underline; }
+
+    .footer-line {
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 28px;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.6px;
+    }
+    .footer-line strong { color: var(--copper); font-weight: 700; }
+
+    /* ══ WA FLOAT ═════════════════════════════════════════════ */
+    .wa-float {
+      position: fixed;
+      bottom: 26px; right: 26px;
+      width: 54px; height: 54px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.38);
+      z-index: 200;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+
+    /* ══ RESPONSIVE ═══════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      section { padding: 48px 18px; }
+      .course-card { grid-template-columns: 1fr; gap: 16px; }
+      .course-price { text-align: left; }
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .ruta-card { padding: 24px 20px; }
+      .ruta-cuota-val { font-size: 30px; }
+      .ruta-save { margin-left: 0; }
+      .combo-table { font-size: 12px; }
+      .combo-table td, .combo-table th { padding: 10px 10px; }
+    }
+    @media (max-width: 420px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+      .pbi-flow { flex-wrap: wrap; justify-content: center; }
+      .flow-arrow { display: none; }
+      .hero h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <img src="SET/katoda-logo-blanco.svg" alt="Katoda">
+    </a>
+    <a href="#porque">¿Por qué?</a>
+    <a href="#excel">Excel</a>
+    <a href="#powerbi">Power BI</a>
+    <a href="#ruta">Ruta</a>
+    <a href="#combos">Combos</a>
+    <a href="#inscribirse">Inscribirse</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ═════════════════════════════════════════════════ -->
+<section class="hero" id="inicio">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-brand">
+      <div class="hero-logo"><img src="SET/katoda-logo-blanco.svg" alt="Katoda"></div>
+      <div class="hero-tagline-badge">Formación Aplicada</div>
+    </div>
+    <h1>
+      Aprende Excel y Power BI
+      <em>como se usan en el trabajo</em>
+    </h1>
+    <p class="hero-sub">Cursos en vivo, grupos reducidos y ejercicios aplicados a casos reales para que aprendas practicando, no solo mirando.</p>
+    <div class="chips">
+      <div class="chip">🎥 Clases en vivo</div>
+      <div class="chip">👥 Grupos reducidos</div>
+      <div class="chip">💬 Soporte WhatsApp</div>
+      <div class="chip">🖥️ Microsoft 365 incluido</div>
+      <div class="chip copper">☁️ Workspace Power BI</div>
+      <div class="chip copper">📤 Carga online</div>
+      <div class="chip">💼 Enfoque laboral</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ POR QUÉ KATODA ════════════════════════════════════════ -->
+<section class="porque-sec" id="porque">
+  <div class="section-inner">
+    <div class="section-label">Por qué elegirnos</div>
+    <h2 class="section-title">No es otro curso grabado</h2>
+    <p class="section-subtitle">Katoda es formación boutique: en vivo, acompañada y aplicada al trabajo real desde el primer día.</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🏗️</div>
+        <div class="benefit-title">Formación práctica</div>
+        <div class="benefit-desc">Ejercicios reales, no solo teoría. Cada clase tiene un caso aplicado al trabajo.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💬</div>
+        <div class="benefit-title">Acompañamiento cercano</div>
+        <div class="benefit-desc">Soporte directo por WhatsApp durante todo el proceso de aprendizaje.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">👥</div>
+        <div class="benefit-title">Grupos reducidos</div>
+        <div class="benefit-desc">Más espacio para preguntar, practicar y avanzar sin quedarte atrás.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🖥️</div>
+        <div class="benefit-title">Microsoft 365 incluido</div>
+        <div class="benefit-desc">Aprendes con las herramientas reales que se usan en empresas hoy.</div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💼</div>
+        <div class="benefit-title">Enfoque laboral</div>
+        <div class="benefit-desc">Aprendes a ordenar, analizar y presentar datos como se hace en el trabajo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CURSOS EXCEL ══════════════════════════════════════════ -->
+<section class="cursos-excel-sec" id="excel">
+  <div class="section-inner">
+    <div class="tool-tag excel">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect width="15" height="15" rx="2.5" fill="#217346"/><path d="M3 5h9M3 7.5h9M3 10h9M7.5 5v5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
+      Herramienta 01 · Excel
+    </div>
+    <h2 class="section-title">Cursos de Excel</h2>
+    <p class="section-subtitle">Desde ordenar tus datos hasta automatizar reportes y preparar información para Business Intelligence.</p>
+
+    <div class="route-cards">
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv0">Nivel 0 — Fundamentos</div>
+          <div class="course-name">Excel desde cero para trabajar con datos</div>
+          <div class="course-desc">Para quienes parten desde cero. Aprende estructura, formatos, fórmulas esenciales y limpieza básica de datos.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$28.000</div>
+          <div class="price-total">Total $83.900</div>
+        </div>
+      </div>
+
+      <div class="level-connector">
+        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Siguiente nivel
+      </div>
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv1-excel">Nivel 1 — Intermedio</div>
+          <div class="course-name">Análisis en Excel para reportes reales</div>
+          <div class="course-desc">BUSCARV, tablas dinámicas, análisis de información y tu primer dashboard en Excel.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$35.000</div>
+          <div class="price-total">Total $104.900</div>
+        </div>
+      </div>
+
+      <div class="level-connector">
+        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Siguiente nivel
+      </div>
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv2-excel">Nivel 2 — Excel para BI</div>
+          <div class="course-name">Excel para automatizar y preparar datos</div>
+          <div class="course-desc">Power Query, consolidación de reportes y modelo de datos básico para avanzar hacia Power BI.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$31.500</div>
+          <div class="price-total">Total $94.400</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CURSOS POWER BI ════════════════════════════════════════ -->
+<section class="cursos-pbi-sec" id="powerbi">
+  <div class="section-inner">
+    <div class="tool-tag pbi">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect width="15" height="15" rx="2.5" fill="#F2C811"/><rect x="2" y="8" width="2.5" height="5" rx="0.5" fill="#1A1820"/><rect x="6.2" y="5" width="2.5" height="8" rx="0.5" fill="#1A1820"/><rect x="10.5" y="2" width="2.5" height="11" rx="0.5" fill="#1A1820"/></svg>
+      Herramienta 02 · Power BI
+    </div>
+    <h2 class="section-title">Cursos de Power BI</h2>
+    <p class="section-subtitle">Aprende a conectar datos, construir dashboards y publicarlos en un workspace online, trabajando como se hace en entornos reales de empresa.</p>
+
+    <div class="pbi-flow-wrap">
+      <div class="pbi-flow-label">Flujo de trabajo en Power BI</div>
+      <div class="pbi-flow">
+        <div class="flow-node">
+          <div class="flow-node-icon">📊</div>
+          <div class="flow-node-label">Datos</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">⚙️</div>
+          <div class="flow-node-label">Power Query</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">🗂️</div>
+          <div class="flow-node-label">Modelo</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">📈</div>
+          <div class="flow-node-label">Dashboard</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">☁️</div>
+          <div class="flow-node-label">Workspace Online</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <div class="flow-node-icon">🌐</div>
+          <div class="flow-node-label">Visualización Web</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="route-cards">
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv1-pbi">Nivel 1 — Básico</div>
+          <div class="course-name">Tu primer dashboard profesional en Power BI</div>
+          <div class="course-desc">Conecta datos, transforma con Power Query, crea tu primer modelo y publica tu dashboard en un workspace online.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$31.500</div>
+          <div class="price-total">Total $94.400</div>
+        </div>
+      </div>
+
+      <div class="level-connector">
+        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Siguiente nivel
+      </div>
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv2-pbi">Nivel 2 — Intermedio</div>
+          <div class="course-name">Power BI con lógica de negocio</div>
+          <div class="course-desc">Aprende DAX, KPIs y visualizaciones para crear dashboards que respondan preguntas reales del negocio, trabajando en entorno web y workspace.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$38.500</div>
+          <div class="price-total">Total $115.400</div>
+        </div>
+      </div>
+
+      <div class="level-connector">
+        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Siguiente nivel
+      </div>
+
+      <div class="course-card">
+        <div>
+          <div class="course-level lv3-pbi">Nivel 3 — Avanzado</div>
+          <div class="course-name">Soluciones completas en Power BI</div>
+          <div class="course-desc">DAX avanzado, Power Automate, publicación online y caso aplicado a industria para construir soluciones completas.</div>
+        </div>
+        <div class="course-price">
+          <div class="price-label">3 cuotas de</div>
+          <div class="price-cuota">$42.000</div>
+          <div class="price-total">Total $125.900</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pbi-special">
+      <div class="pbi-special-inner">
+        <div class="pbi-special-tag">☁️ Diferencial Katoda</div>
+        <div class="pbi-special-title">Experiencia Power BI real</div>
+        <div class="pbi-special-text">No solo aprenderás a crear reportes. También trabajarás con publicación online, workspace y carga de datos en un entorno más parecido al uso real de Power BI en empresas.</div>
+        <div class="pbi-features">
+          <div class="pbi-feat">🖥️ Power BI Desktop</div>
+          <div class="pbi-feat">🌐 Power BI Service</div>
+          <div class="pbi-feat">📁 Workspace online</div>
+          <div class="pbi-feat">☁️ Carga en la nube</div>
+          <div class="pbi-feat">📤 Publicación de dashboards</div>
+          <div class="pbi-feat">👥 Trabajo colaborativo</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ RUTA RECOMENDADA ══════════════════════════════════════ -->
+<section class="ruta-sec" id="ruta">
+  <div class="section-inner">
+    <div class="section-label">Ruta destacada</div>
+    <h2 class="section-title">¿Por dónde empezar?</h2>
+    <p class="section-subtitle">Si no sabes cuál camino tomar, esta combinación es la más elegida y la que mejor prepara para el trabajo real con datos.</p>
+
+    <div class="ruta-card">
+      <div class="ruta-card-inner">
+        <div class="ruta-badge">⭐ Combo más elegido</div>
+        <div class="ruta-name">Excel para BI <strong>+</strong> Power BI Básico</div>
+        <div class="ruta-desc">El puente ideal para dejar de hacer reportes manuales, automatizar la preparación de datos y comenzar a visualizar información de forma profesional.</div>
+        <div class="ruta-courses">
+          <div class="ruta-pill">Excel N2 — Automatización</div>
+          <div class="ruta-plus">+</div>
+          <div class="ruta-pill">Power BI N1 — Dashboard</div>
+        </div>
+        <div class="ruta-divider"></div>
+        <div class="ruta-pricing">
+          <div>
+            <div class="ruta-cuota-label">3 cuotas de</div>
+            <div class="ruta-cuota-val">$53.500</div>
+            <div class="ruta-total">Total $160.500</div>
+          </div>
+          <div class="ruta-save">✓ Ahorras $28.300</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMBOS TABLE ══════════════════════════════════════════ -->
+<section class="combos-sec" id="combos">
+  <div class="section-inner">
+    <div class="section-label">Promociones</div>
+    <h2 class="section-title">Combos y rutas con descuento</h2>
+    <p class="section-subtitle">Toma dos o más niveles juntos y ahorra. Todos los precios incluyen Mercado Pago.</p>
+
+    <div class="combo-table-wrap">
+      <table class="combo-table">
+        <thead>
+          <tr>
+            <th>Combo / Ruta</th>
+            <th>Ideal para</th>
+            <th>Precio total</th>
+            <th>En cuotas</th>
+            <th>Ahorro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="combo-name">Excel N0 + N1</div></td>
+            <td><div class="combo-desc">De cero a analista en Excel</div></td>
+            <td><div class="combo-price">$160.500</div></td>
+            <td><div class="combo-cuota">3 × $53.500</div></td>
+            <td><div class="combo-save">↓ $28.300</div></td>
+          </tr>
+          <tr>
+            <td><div class="combo-name">Excel N1 + N2</div></td>
+            <td><div class="combo-desc">Análisis + automatización con Power Query</div></td>
+            <td><div class="combo-price">$170.000</div></td>
+            <td><div class="combo-cuota">3 × $56.700</div></td>
+            <td><div class="combo-save">↓ $29.300</div></td>
+          </tr>
+          <tr class="dest-row">
+            <td><div class="combo-name">Excel N2 + Power BI N1 <span class="star-pill">★ Más elegido</span></div></td>
+            <td><div class="combo-desc">Automatizar en Excel y visualizar en Power BI</div></td>
+            <td><div class="combo-price">$160.500</div></td>
+            <td><div class="combo-cuota">3 × $53.500</div></td>
+            <td><div class="combo-save">↓ $28.300</div></td>
+          </tr>
+          <tr>
+            <td><div class="combo-name">Power BI N1 + N2</div></td>
+            <td><div class="combo-desc">Del primer dashboard a lógica de negocio real</div></td>
+            <td><div class="combo-price">$178.400</div></td>
+            <td><div class="combo-cuota">3 × $59.500</div></td>
+            <td><div class="combo-save">↓ $31.400</div></td>
+          </tr>
+          <tr>
+            <td><div class="combo-name">Power BI N2 + N3</div></td>
+            <td><div class="combo-desc">Dashboards profesionales + soluciones completas</div></td>
+            <td><div class="combo-price">$205.700</div></td>
+            <td><div class="combo-cuota">3 × $68.600</div></td>
+            <td><div class="combo-save">↓ $35.600</div></td>
+          </tr>
+          <tr>
+            <td><div class="combo-name">Ruta Completa Excel</div></td>
+            <td><div class="combo-desc">Los 3 niveles de Excel</div></td>
+            <td><div class="combo-price">$241.400</div></td>
+            <td><div class="combo-cuota">3 × $80.500</div></td>
+            <td><div class="combo-save">↓ $41.800</div></td>
+          </tr>
+          <tr>
+            <td><div class="combo-name">Ruta Completa Power BI</div></td>
+            <td><div class="combo-desc">Los 3 niveles de Power BI</div></td>
+            <td><div class="combo-price">$283.400</div></td>
+            <td><div class="combo-cuota">3 × $94.500</div></td>
+            <td><div class="combo-save">↓ $52.300</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="combo-note">Precios con Mercado Pago incluido. 3 cuotas disponibles con tarjeta de crédito.</div>
+  </div>
+</section>
+
+<!-- ══ CTA FINAL ═════════════════════════════════════════════ -->
+<section class="cta-sec" id="inscribirse">
+  <div class="section-inner">
+    <div class="section-label">Inscripción</div>
+    <h2 class="section-title">¿No sabes qué nivel elegir?</h2>
+    <p class="section-subtitle">Completa el formulario y te orientamos según tu experiencia actual, tus objetivos y lo que necesitas aprender para tu trabajo.</p>
+
+    <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" target="_blank" class="cta-btn">
+      Reserva tu cupo
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-lbl">Formulario</div>
+        <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" target="_blank" class="contact-val">forms.gle/Ddz5AdKrKgrMU3F29</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-lbl">WhatsApp</div>
+        <a href="https://wa.me/56987625904" target="_blank" class="contact-val">wa.me/56987625904</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-lbl">Instagram</div>
+        <a href="https://instagram.com/katoda.cl" target="_blank" class="contact-val">@katoda.cl</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-lbl">Web</div>
+        <a href="https://katoda.cl" target="_blank" class="contact-val">katoda.cl</a>
+      </div>
+    </div>
+
+    <div class="footer-line"><strong>Katoda</strong> · Transformando con propósito.</div>
+  </div>
+</section>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/56987625904?text=Hola%20Katoda%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20los%20cursos" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">💬</a>
+
+<script>
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector('.nav a[href="#' + entry.target.id + '"]');
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
