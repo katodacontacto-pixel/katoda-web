@@ -4,109 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asesorías | Katoda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --copper: #9333EA;
+      --copper-light: #A98EFF;
     }
-    :root{
-      --navy:#1A1120;
-      --navy-mid:#231530;
-      --copper:#6C4EF6;
-      --copper-light:#A98EFF;
-      --text:#FFFFFF;
-      --soft:rgba(255,255,255,0.65);
-    }
-    body{
-      font-family:Arial, sans-serif;
-      min-height:100vh;
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      min-height: 100vh;
       background:
-        radial-gradient(circle at top right, rgba(108,78,246,0.12), transparent 30%),
-        linear-gradient(150deg,#130D1A 0%,#1E1228 60%,#2D1F3D 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      color:white;
-      text-align:center;
-      padding:40px;
-      position:relative;
+        radial-gradient(circle at top right, rgba(147,51,234,0.14), transparent 32%),
+        linear-gradient(150deg, #0D0B16 0%, #130B22 60%, #1E1035 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      padding: 40px;
+      position: relative;
     }
-    body::before{
-      content:'';
-      position:absolute;
-      inset:0;
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size:40px 40px;
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
     }
-    .contenedor{
-      max-width:760px;
-      position:relative;
-      z-index:1;
+    .contenedor {
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
     }
-    .logo{
-      margin-bottom:8px;
+    .logo { margin-bottom: 12px; }
+    .logo a { display: inline-block; transition: opacity 0.2s; }
+    .logo a:hover { opacity: 0.82; }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(42px, 6vw, 68px);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      line-height: 1.1;
     }
-    .logo a{
-      display:inline-block;
+    p {
+      font-size: 18px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.60);
+      max-width: 600px;
+      margin: 0 auto;
     }
-    .logo img{
-      width:400px;
-      max-width:85%;
-      transition:opacity 0.2s;
+    .tag {
+      margin-top: 30px;
+      color: var(--copper-light);
+      font-size: 12.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
     }
-    .logo a:hover img{
-      opacity:0.85;
+    .boton {
+      display: inline-block;
+      margin-top: 48px;
+      padding: 15px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.80);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.25s;
     }
-    h1{
-      font-size:clamp(42px,6vw,68px);
-      margin-bottom:20px;
-      letter-spacing:-2px;
-      font-weight:800;
-    }
-    p{
-      font-size:20px;
-      line-height:1.8;
-      color:var(--soft);
-      max-width:620px;
-      margin:0 auto;
-    }
-    .tag{
-      margin-top:32px;
-      color:var(--copper-light);
-      font-size:13px;
-      letter-spacing:2px;
-      text-transform:uppercase;
-    }
-    .boton{
-      display:inline-block;
-      margin-top:50px;
-      padding:16px 32px;
-      border-radius:14px;
-      text-decoration:none;
-      color:white;
-      border:1px solid rgba(255,255,255,0.12);
-      background:rgba(255,255,255,0.04);
-      transition:0.3s;
-      font-weight:600;
-    }
-    .boton:hover{
-      background:rgba(108,78,246,0.18);
-      border-color:rgba(108,78,246,0.35);
-      transform:translateY(-3px);
+    .boton:hover {
+      background: rgba(147,51,234,0.18);
+      border-color: rgba(147,51,234,0.38);
+      color: white;
+      transform: translateY(-3px);
     }
   </style>
 </head>
 <body>
   <div class="contenedor">
+ 
     <div class="logo">
       <a href="index.html">
-        <img src="SET/katoda-logo-transparente-horizontal-naranja.png" alt="Katoda">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" height="52" style="width:auto;display:block;margin:0 auto">
+          <circle cx="100" cy="20" r="22" fill="#F59E0B"/>
+          <path d="M22,222 L100,140 L178,222" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+          <path d="M22,172 L100,90 L178,172" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+          <path d="M22,122 L100,40 L178,122" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="210" y="88" width="3" height="74" rx="1.5" fill="white" opacity="0.3"/>
+          <text x="236" y="158" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="72" letter-spacing="1" fill="white">KATODA</text>
+        </svg>
       </a>
     </div>
+ 
     <h1>Asesorías</h1>
     <p>
       Tu perfil profesional, tu negocio y tus datos merecen
@@ -114,11 +113,17 @@
       para que des el siguiente paso — con claridad y sin rodeos.
     </p>
     <div class="tag">
-      LinkedIn • CV • Canva • Automatización • Dashboards
+      LinkedIn · CV · Canva · Automatización · Dashboards
     </div>
     <a class="boton" href="index.html">
-      Volver al inicio
+      ← Volver al inicio
     </a>
+ 
   </div>
 </body>
 </html>
+
+
+
+
+
