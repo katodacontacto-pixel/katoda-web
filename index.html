@@ -3,870 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Katoda — Formación Aplicada en Analítica de Datos</title>
-  <meta name="description" content="Cursos de Excel y Power BI en vivo, grupos reducidos y enfocados en casos reales. Aprende con Katoda — formación aplicada en analítica de datos.">
-  <meta property="og:title" content="Katoda — Cursos de Excel y Power BI">
-  <meta property="og:description" content="Cursos en vivo, grupos reducidos y ejercicios aplicados a casos reales. Excel desde cero hasta Power BI avanzado.">
-  <meta property="og:image" content="SET/katoda-logo-transparente-horizontal-naranja.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
+  <title>Katoda — Analítica de datos</title>
+  <meta name="description" content="Katoda: formación y asesoría en Excel y Power BI. Transformación con sentido.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:        #0D0B16;
-      --navy-mid:    #150E20;
-      --navy-light:  #1E1035;
-      --copper:      #9333EA;
-      --copper-l:    #A98EFF;
-      --copper-xl:   #C4B8FF;
-      --copper-pale: #F5F0FF;
-      --copper-bg:   #F5F0FF;
-      --bg:          #F0EEF8;
-      --white:       #FFFFFF;
-      --gray-light:  #E8E4F4;
-      --gray-mid:    #C4B8FF;
-      --gray-text:   #6B6B7A;
-      --text:        #2A2040;
-      --text-soft:   #4A3A7A;
-      --excel-green: #217346;
-      --excel-light: #EAF4EE;
-      --pbi-gold:    #D4A017;
-      --pbi-bg:      #FFF9E6;
-      --success:     #2E7D32;
-      --success-bg:  #E8F5E9;
+      --lila:    #9333EA;
+      --lila-l:  #A98EFF;
+      --lila-xl: #C4B8FF;
+      --dark:    #0D0B16;
+      --amber:   #F59E0B;
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* ══ NAV ══════════════════════════════════════════════════ */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13, 11, 22, 0.97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(147, 51, 234, 0.22);
-    }
-    .nav-inner {
-      max-width: 980px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .nav-inner::-webkit-scrollbar { display: none; }
-    .nav-logo {
-      display: inline-flex;
-      align-items: center;
-      padding: 10px 18px 10px 0;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      margin-right: 6px;
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .nav-logo img { height: 30px; width: auto; display: block; }
-    .nav a {
-      padding: 15px 13px;
-      color: rgba(255,255,255,0.6);
-      font-size: 12.5px;
-      font-weight: 500;
-      text-decoration: none;
-      white-space: nowrap;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .nav a:hover, .nav a.active {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--dark);
       color: white;
-      border-bottom-color: var(--copper);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* ══ HERO ═════════════════════════════════════════════════ */
+    /* ══ HERO ══ */
     .hero {
-      background: var(--navy);
-      background-image:
-        radial-gradient(ellipse at 15% 60%, rgba(147,51,234,0.15) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 15%, rgba(20,10,35,0.9) 0%, transparent 55%),
-        linear-gradient(150deg, #0D0B16 0%, #130B22 60%, #1E1035 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 80px 24px 70px;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 36px 36px;
-      pointer-events: none;
-    }
-    .hero-glow {
-      position: absolute;
-      bottom: -80px; right: -80px;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(147,51,234,0.15) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 880px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .hero-logo img {
-      height: 48px;
-      width: auto;
-      display: block;
-    }
-    .hero-tagline-badge {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--copper-xl);
-      background: rgba(147,51,234,0.18);
-      border: 1px solid rgba(147,51,234,0.30);
-      padding: 4px 10px;
-      border-radius: 20px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(34px, 5vw, 56px);
-      font-weight: 800;
-      color: white;
-      line-height: 1.12;
-      margin-bottom: 20px;
-      letter-spacing: 0px;
-      max-width: 720px;
-    }
-    .hero h1 em {
-      color: var(--copper);
-      font-style: normal;
-      display: block;
-    }
-    .hero-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.65);
-      max-width: 580px;
-      line-height: 1.75;
-      margin-bottom: 38px;
-    }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.88);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 7px 14px;
-      border-radius: 40px;
-      white-space: nowrap;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .chip:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.22);
-    }
-    .chip.copper {
-      background: rgba(147,51,234,0.22);
-      border-color: rgba(147,51,234,0.38);
-      color: #C4B8FF;
-    }
-
-    /* ══ HERO CTA ════════════════════════════════════════════ */
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: 36px;
-      flex-wrap: wrap;
-    }
-    .hero-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--copper);
-      color: white;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 14px 30px;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .hero-btn-primary:hover {
-      background: var(--copper-l);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(147,51,234,0.42);
-    }
-    .hero-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: rgba(255,255,255,0.82);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 14px 24px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.18);
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .hero-btn-secondary:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.30);
-    }
-    .hero-urgency {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-    }
-    .hero-urgency strong { color: var(--copper-xl); font-weight: 600; }
-
-    /* ══ SECCIÓN GENÉRICA ═════════════════════════════════════ */
-    section { padding: 64px 24px; }
-    .section-inner { max-width: 900px; margin: 0 auto; }
-
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 10.5px;
-      font-weight: 700;
-      color: var(--copper);
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .section-label::before {
-      content: '';
-      display: block;
-      width: 20px; height: 2px;
-      background: var(--copper);
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(26px, 3.2vw, 38px);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px;
-      letter-spacing: 0px;
-      line-height: 1.15;
-    }
-    .section-subtitle {
-      font-size: 15px;
-      color: var(--text-soft);
-      max-width: 640px;
-      line-height: 1.75;
-      margin-bottom: 44px;
-    }
-
-    /* ══ POR QUÉ KATODA ═══════════════════════════════════════ */
-    .porque-sec {
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-    }
-    .porque-sec::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(147,51,234,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(147,51,234,0.04) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-    .porque-sec .section-inner { position: relative; z-index: 1; }
-    .porque-sec .section-title { color: var(--text); }
-    .porque-sec .section-subtitle { color: var(--text-soft); }
-    .porque-sec .section-label { color: var(--copper); }
-    .porque-sec .section-label::before { background: var(--copper); }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 14px;
-    }
-    .benefit-card {
-      background: var(--white);
-      border: 1px solid var(--gray-light);
-      border-radius: 14px;
-      padding: 24px 18px 20px;
-      transition: all 0.25s;
-    }
-    .benefit-card:hover {
-      background: var(--copper-pale);
-      border-color: rgba(147,51,234,0.30);
-      transform: translateY(-3px);
-    }
-    .benefit-icon {
-      width: 42px; height: 42px;
-      background: rgba(147,51,234,0.18);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 14px;
-      border: 1px solid rgba(147,51,234,0.22);
-    }
-    .benefit-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 7px;
-      line-height: 1.3;
-    }
-    .benefit-desc {
-      font-size: 12.5px;
-      color: var(--text-soft);
-      line-height: 1.55;
-    }
-
-
-
-    /* ══ HERRAMIENTA TAG ══════════════════════════════════════ */
-    .tool-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 14px 5px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .tool-tag.excel {
-      background: var(--excel-light);
-      color: var(--excel-green);
-      border: 1px solid rgba(33,115,70,0.18);
-    }
-    .tool-tag.pbi {
-      background: var(--pbi-bg);
-      color: var(--pbi-gold);
-      border: 1px solid rgba(212,160,23,0.28);
-    }
-
-    /* ══ INFO OPERATIVA ══════════════════════════════════════ */
-    .course-meta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
-    }
-    .course-meta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10.5px;
-      font-weight: 600;
-      color: var(--gray-text);
-      background: var(--bg);
-      border: 1px solid var(--gray-light);
-      padding: 2px 8px;
-      border-radius: 4px;
-      letter-spacing: 0.2px;
-    }
-
-    /* ══ CURSOS ═══════════════════════════════════════════════ */
-    .cursos-excel-sec { background: #EAF4EE; }
-    .cursos-excel-sec .section-label          { color: var(--excel-green); }
-    .cursos-excel-sec .section-label::before  { background: var(--excel-green); }
-    .cursos-excel-sec .section-title          { color: #1A5C38; }
-    .cursos-excel-sec .course-card            { background: #FFFFFF; border-color: rgba(33,115,70,0.15); }
-    .cursos-excel-sec .course-card:hover      { border-color: var(--excel-green); box-shadow: 0 6px 28px rgba(33,115,70,0.16); }
-    .cursos-excel-sec .price-cuota            { color: var(--excel-green); }
-    .cursos-excel-sec .price-total            { color: #4A7A5A; }
-    .cursos-excel-sec .level-connector        { color: var(--excel-green); }
-    .cursos-excel-sec .course-meta-badge      { background: #D4EDDA; border-color: rgba(33,115,70,0.20); color: #1A5C38; }
-    .cursos-pbi-sec                           { background: #FFF8E1; }
-    .cursos-pbi-sec .section-label            { color: #9A6F00; }
-    .cursos-pbi-sec .section-label::before    { background: #9A6F00; }
-    .cursos-pbi-sec .section-title            { color: #6B4A00; }
-    .cursos-pbi-sec .course-card              { background: #FFFFFF; border-color: rgba(212,160,23,0.20); }
-    .cursos-pbi-sec .course-card:hover        { border-color: var(--pbi-gold); box-shadow: 0 6px 28px rgba(212,160,23,0.22); }
-    .cursos-pbi-sec .price-cuota              { color: #9A6F00; }
-    .cursos-pbi-sec .price-total              { color: #8A6800; }
-    .cursos-pbi-sec .level-connector          { color: #9A6F00; }
-    .cursos-pbi-sec .course-meta-badge        { background: #FEF3C7; border-color: rgba(212,160,23,0.25); color: #7A5500; }
-    .cursos-pbi-sec .pbi-flow-wrap            { background: #FFFBF0; border-color: rgba(212,160,23,0.28); }
-    .cursos-pbi-sec .pbi-flow-label           { color: #9A6F00; }
-    .cursos-pbi-sec .pbi-flow-label::after    { background: rgba(212,160,23,0.25); }
-    .cursos-pbi-sec .flow-node-icon           { background: rgba(212,160,23,0.14); border-color: rgba(212,160,23,0.25); }
-    .cursos-pbi-sec .flow-arrow               { color: #9A6F00; }
-    .cursos-pbi-sec .pbi-special              { background: #FEF3C7; border-color: rgba(212,160,23,0.28); }
-    .cursos-pbi-sec .pbi-special-tag          { background: rgba(212,160,23,0.18); border-color: rgba(212,160,23,0.32); color: #7A5500; }
-    .cursos-pbi-sec .pbi-feat                 { background: #FFFBF0; border-color: rgba(212,160,23,0.28); color: #7A5500; }
-
-    .route-cards { display: flex; flex-direction: column; gap: 0; }
-
-    .course-card {
-      background: var(--white);
-      border: 1px solid var(--gray-light);
-      border-radius: 14px;
-      padding: 24px 26px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
-      align-items: center;
-      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
-    }
-    .course-card:hover {
-      border-color: var(--copper);
-      box-shadow: 0 6px 28px rgba(147,51,234,0.18);
-      transform: translateY(-2px);
-      position: relative;
-      z-index: 2;
-    }
-
-    .course-level {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-    .lv0       { background: #E8F5E9; color: #2E7D32; }
-    .lv1-excel { background: #FFF8E1; color: #E65100; }
-    .lv2-excel { background: #E3F2FD; color: #1565C0; }
-    .lv1-pbi   { background: #EDE7F6; color: #4527A0; }
-    .lv2-pbi   { background: #FCE4EC; color: #880E4F; }
-    .lv3-pbi   { background: #EDE7F6; color: #4A3A7A; }
-
-    .course-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 15.5px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 7px;
-      line-height: 1.3;
-    }
-    .course-desc {
-      font-size: 13.5px;
-      color: var(--text-soft);
-      line-height: 1.65;
-    }
-
-    .course-price {
-      text-align: right;
-      flex-shrink: 0;
-      min-width: 135px;
-    }
-    .price-badge-tanda {
-      display: inline-block;
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #9333EA;
-      background: rgba(147,51,234,0.10);
-      border: 1px solid rgba(147,51,234,0.25);
-      border-radius: 4px;
-      padding: 2px 7px;
-      margin-bottom: 6px;
-    }
-    .price-regular {
-      font-size: 10px;
-      color: var(--gray-text);
-      text-decoration: line-through;
-      margin-top: 3px;
-    }
-    .price-label {
-      font-size: 10px;
-      color: var(--gray-text);
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-    .price-cuota {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--copper);
-      line-height: 1.1;
-    }
-    .price-total {
-      font-size: 11.5px;
-      color: var(--gray-text);
-      margin-top: 4px;
-    }
-
-    .level-connector {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 8px 20px;
-      color: var(--copper);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-
-    /* ══ POWER BI FLOW ════════════════════════════════════════ */
-    .pbi-flow-wrap {
-      background: var(--white);
-      border-radius: 14px;
-      padding: 24px 28px 20px;
-      margin-bottom: 28px;
-      border: 1px solid var(--gray-light);
-      position: relative;
-      overflow: hidden;
-    }
-    .pbi-flow-wrap::after {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(147,51,234,0.12) 0%, transparent 70%);
-    }
-    .pbi-flow-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--copper);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .pbi-flow-label::after {
-      content: '';
       flex: 1;
-      height: 1px;
-      background: var(--gray-light);
-    }
-    .pbi-flow {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .pbi-flow::-webkit-scrollbar { display: none; }
-    .flow-node {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
-      flex: 1;
-      min-width: 72px;
-      padding: 4px 6px;
-    }
-    .flow-node-icon {
-      width: 38px; height: 38px;
-      background: rgba(147,51,234,0.10);
-      border: 1px solid rgba(147,51,234,0.18);
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 17px;
-    }
-    .flow-node-label {
-      font-size: 9.5px;
-      font-weight: 600;
-      color: var(--text-soft);
-      text-align: center;
-      line-height: 1.35;
-    }
-    .flow-arrow {
-      font-size: 13px;
-      color: var(--copper);
-      flex-shrink: 0;
-      padding: 0 2px;
-      margin-bottom: 18px;
-      opacity: 0.85;
-    }
-
-    /* ══ PBI SPECIAL ══════════════════════════════════════════ */
-    .pbi-special {
-      background: var(--copper-pale);
-      border-radius: 14px;
-      padding: 30px;
-      margin-top: 28px;
-      border: 1px solid rgba(147,51,234,0.20);
+      padding: 72px 24px 56px;
       position: relative;
       overflow: hidden;
-    }
-    .pbi-special::before {
-      content: '';
-      position: absolute;
-      top: -50px; right: -50px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(147,51,234,0.12) 0%, transparent 70%);
-    }
-    .pbi-special-inner { position: relative; z-index: 1; }
-    .pbi-special-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(147,51,234,0.22);
-      border: 1px solid rgba(147,51,234,0.32);
-      color: var(--copper-xl);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 20px;
-      margin-bottom: 14px;
-    }
-    .pbi-special-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .pbi-special-text {
-      font-size: 13.5px;
-      color: var(--text-soft);
-      line-height: 1.75;
-      margin-bottom: 20px;
-      max-width: 620px;
-    }
-    .pbi-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .pbi-feat {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--white);
-      border: 1px solid rgba(147,51,234,0.20);
-      color: var(--copper);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 13px;
-      border-radius: 40px;
-    }
-
-    /* ══ RUTA RECOMENDADA ═════════════════════════════════════ */
-    .ruta-sec {
-      background: var(--copper-bg);
-      border-top: 3px solid var(--copper);
-      border-bottom: 3px solid var(--copper);
-    }
-
-    .ruta-card {
-      background: var(--white);
-      border: 2px solid var(--copper);
-      border-radius: 18px;
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
-      max-width: 720px;
-      margin: 0 auto;
-      box-shadow: 0 12px 48px rgba(147,51,234,0.18);
-    }
-    .ruta-card::after {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 240px; height: 240px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(147,51,234,0.10) 0%, transparent 70%);
-    }
-    .ruta-card-inner { position: relative; z-index: 1; }
-    .ruta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--copper);
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 5px 14px;
-      border-radius: 40px;
-      margin-bottom: 18px;
-    }
-    .ruta-name {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(22px, 2.8vw, 28px);
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px;
-      line-height: 1.25;
-    }
-    .ruta-name strong { color: var(--copper); font-weight: 800; }
-    .ruta-desc {
-      font-size: 14px;
-      color: var(--text-soft);
-      line-height: 1.75;
-      margin-bottom: 24px;
-      max-width: 560px;
-    }
-    .ruta-courses {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-    .ruta-pill {
-      background: var(--copper-pale);
-      border: 1.5px solid rgba(147,51,234,0.30);
-      color: var(--copper);
-      font-size: 12.5px;
-      font-weight: 600;
-      padding: 7px 16px;
-      border-radius: 8px;
-    }
-    .ruta-plus { font-size: 20px; font-weight: 700; color: var(--copper); }
-    .ruta-divider { width: 100%; height: 1px; background: var(--gray-light); margin-bottom: 24px; }
-    .ruta-pricing {
-      display: flex;
-      align-items: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .ruta-cuota-label { font-size: 11px; color: var(--gray-text); font-weight: 500; margin-bottom: 3px; }
-    .ruta-cuota-val {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--copper);
-      line-height: 1;
-    }
-    .ruta-total { font-size: 13px; color: var(--gray-text); margin-top: 5px; }
-    .ruta-save {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--success-bg);
-      color: var(--success);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 40px;
-      border: 1px solid rgba(46,125,50,0.18);
-      margin-left: auto;
-    }
-
-    /* ══ COMBOS TABLE ═════════════════════════════════════════ */
-    .combos-sec { background: linear-gradient(135deg, #EAF4EE 0%, #FFF8E1 100%); }
-    .combos-sec .section-label         { color: var(--excel-green); }
-    .combos-sec .section-label::before { background: var(--excel-green); }
-    .combos-sec .combo-table-wrap      { box-shadow: 0 4px 20px rgba(33,115,70,0.08); }
-
-    .combo-table-wrap {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--gray-light);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-    .combo-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-    }
-    .combo-table thead th {
-      color: white;
-      font-weight: 600;
-      font-size: 11.5px;
-      padding: 13px 16px;
-      text-align: left;
-      letter-spacing: 0.3px;
-    }
-    .combo-table thead th:nth-child(1),
-    .combo-table thead th:nth-child(2) { background: #1E6B3A; }
-    .combo-table thead th:nth-child(3),
-    .combo-table thead th:nth-child(4) { background: #9A6F00; }
-    .combo-table thead th:nth-child(5) { background: #217346; }
-    .combo-table tbody tr { transition: background 0.15s; }
-    .combo-table tbody tr:nth-child(even) { background: rgba(234,244,238,0.6); }
-    .combo-table tbody tr:hover { background: rgba(254,243,199,0.7); }
-    .combo-table tbody tr.dest-row { background: linear-gradient(90deg, rgba(234,244,238,0.9) 0%, rgba(254,243,199,0.9) 100%) !important; }
-    .combo-table tbody tr.dest-row td:first-child { border-left: 3px solid var(--excel-green); }
-    .combo-table td {
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--gray-light);
-      vertical-align: middle;
-    }
-    .combo-table tr:last-child td { border-bottom: none; }
-    .combo-name { font-weight: 600; color: var(--navy); }
-    .combo-desc { font-size: 12px; color: var(--gray-text); margin-top: 2px; }
-    .combo-price {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 700;
-      color: #1E6B3A;
-      font-size: 15px;
-      white-space: nowrap;
-    }
-    .combo-cuota { color: var(--text-soft); font-size: 12.5px; white-space: nowrap; }
-    .combo-save { font-weight: 700; color: var(--success); font-size: 12.5px; white-space: nowrap; }
-    .star-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
-      font-size: 9.5px;
-      background: #9A6F00;
-      color: white;
-      padding: 2px 8px;
-      border-radius: 40px;
-      margin-left: 6px;
-      font-weight: 700;
-      vertical-align: middle;
-    }
-    .combo-note { font-size: 12px; color: var(--gray-text); margin-top: 14px; text-align: right; font-style: italic; }
-
-    /* ══ CTA FINAL ════════════════════════════════════════════ */
-    .cta-sec {
-      background: var(--navy);
       background-image:
-        radial-gradient(ellipse at 85% 20%, rgba(147,51,234,0.12) 0%, transparent 50%),
-        linear-gradient(150deg, #0D0B16 0%, #150E20 100%);
-      position: relative;
-      overflow: hidden;
+        radial-gradient(ellipse at 20% 50%, rgba(147,51,234,0.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 15%, rgba(169,142,255,0.08) 0%, transparent 50%);
+      text-align: center;
     }
-    .cta-sec::before {
+    .hero::before {
       content: '';
       position: absolute;
       inset: 0;
@@ -874,602 +52,223 @@
         linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
       background-size: 40px 40px;
+      pointer-events: none;
     }
-    .cta-sec .section-inner { position: relative; z-index: 1; }
-    .cta-sec .section-title { color: white; }
-    .cta-sec .section-subtitle { color: rgba(255,255,255,0.6); }
-    .cta-sec .section-label { color: var(--copper-xl); }
-    .cta-sec .section-label::before { background: var(--copper-xl); }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      width: 100%;
+    }
 
-    .cta-urgency-badge {
+    /* ══ LOGO ══ */
+    .logo-wrap { margin-bottom: 36px; }
+
+    /* ══ SLOGAN ══ */
+    .slogan {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(34px, 5.5vw, 56px);
+      font-weight: 700;
+      line-height: 1.12;
+      color: white;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .slogan em {
+      color: var(--lila-l);
+      font-style: normal;
+    }
+    .subslogan {
+      font-size: 15.5px;
+      color: rgba(255,255,255,0.48);
+      margin-bottom: 60px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    /* ══ CARDS ══ */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
+      padding: 34px 28px 28px;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      background: rgba(147,51,234,0.10);
+      border-color: rgba(147,51,234,0.38);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(147,51,234,0.18);
+    }
+
+    .card-icon {
+      font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: rgba(169,142,255,0.65);
+    }
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.15;
+      margin-bottom: 2px;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .card-cta {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(196,96,48,0.18);
-      border: 1px solid rgba(196,96,48,0.30);
-      color: #F0A070;
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 40px;
-      margin-bottom: 24px;
-    }
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--copper);
-      color: white;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 15px 34px;
-      border-radius: 10px;
-      text-decoration: none;
-      margin-bottom: 40px;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-btn:hover {
-      background: var(--copper-l);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(147,51,234,0.42);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 14px;
-      margin-bottom: 44px;
-    }
-    .contact-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 12px;
-      padding: 18px;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .contact-card:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(147,51,234,0.28);
-    }
-    .contact-lbl {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: var(--copper-xl);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 7px;
-    }
-    .contact-val {
       font-size: 13px;
-      color: white;
-      text-decoration: none;
-      line-height: 1.4;
-      word-break: break-all;
+      font-weight: 600;
+      color: var(--lila-l);
+      margin-top: 8px;
+      transition: gap 0.2s;
     }
-    .contact-val:hover { color: var(--copper-xl); text-decoration: underline; }
+    .card:hover .card-cta { gap: 10px; }
 
-    .footer-line {
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 28px;
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.38);
-      letter-spacing: 0.6px;
+    /* ══ FOOTER ══ */
+    .footer {
+      padding: 30px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
-    .footer-line strong { color: var(--copper); font-weight: 700; }
-
-    /* ══ WA FLOAT ═════════════════════════════════════════════ */
-    .wa-float {
-      position: fixed;
-      bottom: 26px; right: 26px;
-      width: 54px; height: 54px;
-      background: #25D366;
-      border-radius: 50%;
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 20px;
+    }
+    .contact-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 26px;
+      gap: 7px;
       text-decoration: none;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.38);
-      z-index: 200;
-      transition: transform 0.2s, box-shadow 0.2s;
+      color: rgba(255,255,255,0.42);
+      font-size: 12.5px;
+      font-weight: 500;
+      transition: color 0.2s;
     }
-    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+    .contact-item:hover { color: var(--lila-l); }
+    .contact-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--lila);
+      opacity: 0.45;
+      flex-shrink: 0;
+    }
+    .footer-brand {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.2px;
+    }
+    .footer-brand strong { color: rgba(255,255,255,0.32); }
 
-    /* ══ RESPONSIVE ═══════════════════════════════════════════ */
-    @media (max-width: 640px) {
-      section { padding: 48px 18px; }
-      .course-card { grid-template-columns: 1fr; gap: 16px; }
-      .course-price { text-align: left; }
-      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-      .ruta-card { padding: 24px 20px; }
-      .ruta-cuota-val { font-size: 30px; }
-      .ruta-save { margin-left: 0; }
-      .combo-table { font-size: 12px; }
-      .combo-table td, .combo-table th { padding: 10px 10px; }
-    }
-    @media (max-width: 420px) {
-      .benefits-grid { grid-template-columns: 1fr; }
-      .pbi-flow { flex-wrap: wrap; justify-content: center; }
-      .flow-arrow { display: none; }
-      .hero h1 { font-size: 26px; }
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; }
+      .card { padding: 26px 22px 22px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ NAV ══════════════════════════════════════════════════ -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="#inicio" class="nav-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" height="30" style="width:auto;display:block">
+<main class="hero">
+  <div class="hero-inner">
+
+    <!-- Logo horizontal con nombre -->
+    <div class="logo-wrap">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" height="56" style="width:auto;display:block;margin:0 auto">
         <circle cx="100" cy="20" r="22" fill="#F59E0B"/>
         <path d="M22,222 L100,140 L178,222" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
         <path d="M22,172 L100,90 L178,172" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
         <path d="M22,122 L100,40 L178,122" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="210" y="88" width="3" height="74" rx="1.5" fill="white" opacity="0.3"/>
+        <rect x="210" y="88" width="3" height="74" rx="1.5" fill="white" opacity="0.25"/>
         <text x="236" y="158" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="72" letter-spacing="1" fill="white">KATODA</text>
       </svg>
-    </a>
-    <a href="#porque">¿Por qué?</a>
-    <a href="#excel">Excel</a>
-    <a href="#powerbi">Power BI</a>
-    <a href="#ruta">Ruta</a>
-    <a href="#combos">Combos</a>
-    <a href="#inscribirse">Inscribirse</a>
-  </div>
-</nav>
+    </div>
 
-<!-- ══ HERO ═════════════════════════════════════════════════ -->
-<section class="hero" id="inicio">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-brand">
-      <div class="hero-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250" height="48" style="width:auto;display:block">
-          <circle cx="100" cy="20" r="22" fill="#F59E0B"/>
-          <path d="M22,222 L100,140 L178,222" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
-          <path d="M22,172 L100,90 L178,172" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
-          <path d="M22,122 L100,40 L178,122" stroke="white" stroke-width="22" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="210" y="88" width="3" height="74" rx="1.5" fill="white" opacity="0.3"/>
-          <text x="236" y="158" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="72" letter-spacing="1" fill="white">KATODA</text>
-        </svg>
-      </div>
-      <div class="hero-tagline-badge">Formación que se nota de verdad</div>
-    </div>
-    <h1>
-      Deja de improvisar con datos.
-      <em>Aprende a trabajar con ellos de verdad.</em>
-    </h1>
-    <p class="hero-sub">Grupos reducidos, clases en vivo y ejercicios basados en casos reales. Sin videos pregrabados, sin relleno. Solo práctica que se nota de verdad.</p>
-    <div class="chips">
-      <div class="chip">🎥 Clases en vivo</div>
-      <div class="chip">👥 Grupos reducidos</div>
-      <div class="chip">💬 Soporte WhatsApp</div>
-      <div class="chip">🖥️ Microsoft 365 incluido</div>
-      <div class="chip copper">☁️ Workspace Power BI</div>
-      <div class="chip copper">📤 Carga online</div>
-      <div class="chip">📊 Casos aplicados</div>
-    </div>
-    <div class="hero-ctas">
-      <a href="#inscribirse" class="hero-btn-primary">
-        Reserva tu cupo
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <!-- Slogan -->
+    <h1 class="slogan">Transformación<br><em>con sentido.</em></h1>
+    <p class="subslogan">Analítica de datos aplicada · Excel · Power BI · Santiago, Chile</p>
+
+    <!-- Cards -->
+    <div class="cards">
+
+      <a href="Katoda_Folleto.html" class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-label">Formación</div>
+        <div class="card-title">Cursos en vivo</div>
+        <div class="card-desc">Excel y Power BI en grupos reducidos. Aprendes con casos reales, no con ejemplos de manual.</div>
+        <div class="card-cta">
+          Ver cursos y precios
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </a>
-      <a href="#excel" class="hero-btn-secondary">Ver cursos</a>
-    </div>
-    <div class="hero-urgency">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5V6l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      100% online · En vivo · <strong>Próxima cohorte: junio 2026 — Plazas limitadas</strong>
-    </div>
-  </div>
-</section>
 
-<!-- ══ POR QUÉ KATODA ════════════════════════════════════════ -->
-<section class="porque-sec" id="porque">
-  <div class="section-inner">
-    <div class="section-label">Por qué funciona</div>
-    <h2 class="section-title">Ver videos no te prepara para situaciones reales.</h2>
-    <p class="section-subtitle">Katoda es diferente: cada clase resuelve un caso real, cada duda tiene respuesta y cada alumno termina con algo concreto que mostrar.</p>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <div class="benefit-icon">🏗️</div>
-        <div class="benefit-title">Casos del mundo real</div>
-        <div class="benefit-desc">Cada clase resuelve algo que podría ser tuyo mañana. Sin datos inventados ni ejemplos de manual.</div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">💬</div>
-        <div class="benefit-title">Soporte que responde</div>
-        <div class="benefit-desc">Tienes una duda a las 10pm antes de entregar algo mañana. Estamos. WhatsApp directo, sin bots.</div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">👥</div>
-        <div class="benefit-title">Grupos reducidos</div>
-        <div class="benefit-desc">Espacio real para preguntar, equivocarte y aprender. No eres un número en una sala de 200.</div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">🖥️</div>
-        <div class="benefit-title">Herramientas reales incluidas</div>
-        <div class="benefit-desc">Usas Microsoft 365 y Power BI Service desde el primer día. Las mismas que usa tu empresa.</div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">🏅</div>
-        <div class="benefit-title">Certificado al terminar</div>
-        <div class="benefit-desc">Al finalizar recibes tu certificado Katoda. Algo concreto que agregar a tu perfil y mostrar donde quieras.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ══ CURSOS EXCEL ══════════════════════════════════════════ -->
-<section class="cursos-excel-sec" id="excel">
-  <div class="section-inner">
-    <div class="tool-tag excel">
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect width="15" height="15" rx="2.5" fill="#217346"/><path d="M3 5h9M3 7.5h9M3 10h9M7.5 5v5" stroke="white" stroke-width="1.2" stroke-linecap="round"/></svg>
-      Herramienta 01 · Excel
-    </div>
-    <h2 class="section-title">Excel: del caos al control.</h2>
-    <p class="section-subtitle">Si hoy tardas horas en algo que debería tomar minutos, este es tu punto de partida.</p>
-
-    <div class="route-cards">
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv0">Nivel 0 — Fundamentos</div>
-          <div class="course-name">Excel desde cero para trabajar con datos</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 6 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Para quienes parten de cero o sienten que nunca aprendieron bien. Estructura, fórmulas esenciales y limpieza de datos desde el principio.</div>
+      <a href="asesoria.html" class="card">
+        <div class="card-icon">🔍</div>
+        <div class="card-label">Consultoría</div>
+        <div class="card-title">Asesorías</div>
+        <div class="card-desc">Dashboards, diagnóstico de datos y automatización adaptados a tu contexto y tus herramientas.</div>
+        <div class="card-cta">
+          Conocer más
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$22.700</div>
-          <div class="price-total">Total $67.900</div>
-          <div class="price-regular">Regular: $84.900</div>
-        </div>
-      </div>
+      </a>
 
-      <div class="level-connector">
-        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Siguiente nivel
-      </div>
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv1-excel">Nivel 1 — Intermedio</div>
-          <div class="course-name">Análisis en Excel para reportes reales</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 6 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Las funciones que realmente se usan: BUSCARV, tablas dinámicas y tu primer dashboard. Lo que debieron enseñarte en la U.</div>
-        </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$25.000</div>
-          <div class="price-total">Total $74.900</div>
-          <div class="price-regular">Regular: $93.900</div>
-        </div>
-      </div>
-
-      <div class="level-connector">
-        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Siguiente nivel
-      </div>
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv2-excel">Nivel 2 — Excel para BI</div>
-          <div class="course-name">Excel para automatizar y preparar datos</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 6 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Automatiza lo que hoy haces a mano. Power Query, consolidación de archivos y preparación de datos para dar el salto a Power BI.</div>
-        </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$28.700</div>
-          <div class="price-total">Total $85.900</div>
-          <div class="price-regular">Regular: $107.900</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ CURSOS POWER BI ════════════════════════════════════════ -->
-<section class="cursos-pbi-sec" id="powerbi">
-  <div class="section-inner">
-    <div class="tool-tag pbi">
-      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect width="15" height="15" rx="2.5" fill="#F2C811"/><rect x="2" y="8" width="2.5" height="5" rx="0.5" fill="#1A1820"/><rect x="6.2" y="5" width="2.5" height="8" rx="0.5" fill="#1A1820"/><rect x="10.5" y="2" width="2.5" height="11" rx="0.5" fill="#1A1820"/></svg>
-      Herramienta 02 · Power BI
-    </div>
-    <h2 class="section-title">Power BI: de los datos a las decisiones.</h2>
-    <p class="section-subtitle">El paso que separa a los que entregan tablas de los que entregan respuestas. Aprende a publicar dashboards reales en un workspace online.</p>
-
-    <div class="pbi-flow-wrap">
-      <div class="pbi-flow-label">Flujo de trabajo en Power BI</div>
-      <div class="pbi-flow">
-        <div class="flow-node">
-          <div class="flow-node-icon">📊</div>
-          <div class="flow-node-label">Datos</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">⚙️</div>
-          <div class="flow-node-label">Power Query</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">🗂️</div>
-          <div class="flow-node-label">Modelo</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">📈</div>
-          <div class="flow-node-label">Dashboard</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">☁️</div>
-          <div class="flow-node-label">Workspace Online</div>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-node">
-          <div class="flow-node-icon">🌐</div>
-          <div class="flow-node-label">Visualización Web</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="route-cards">
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv1-pbi">Nivel 1 — Básico</div>
-          <div class="course-name">Tu primer dashboard profesional en Power BI</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 7 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Conecta, limpia, modela y publica. Al final del curso tendrás un dashboard real funcionando en un workspace online. No una maqueta: algo de verdad.</div>
-        </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$28.700</div>
-          <div class="price-total">Total $85.900</div>
-          <div class="price-regular">Regular: $107.900</div>
-        </div>
-      </div>
-
-      <div class="level-connector">
-        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Siguiente nivel
-      </div>
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv2-pbi">Nivel 2 — Intermedio</div>
-          <div class="course-name">Power BI con lógica de negocio</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 7 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Deja de hacer reportes bonitos sin fondo. DAX, KPIs y lógica de negocio para que tus dashboards respondan preguntas que importan.</div>
-        </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$31.000</div>
-          <div class="price-total">Total $92.900</div>
-          <div class="price-regular">Regular: $116.900</div>
-        </div>
-      </div>
-
-      <div class="level-connector">
-        <svg width="12" height="18" viewBox="0 0 12 18" fill="none"><path d="M6 0v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M1 10l5 6 5-6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Siguiente nivel
-      </div>
-
-      <div class="course-card">
-        <div>
-          <div class="course-level lv3-pbi">Nivel 3 — Avanzado</div>
-          <div class="course-name">Soluciones completas en Power BI</div>
-          <div class="course-meta"><span class="course-meta-badge">🕐 8 semanas</span><span class="course-meta-badge">🌐 Online · En vivo</span></div>
-          <div class="course-desc">Soluciones completas de análisis: DAX avanzado, automatización con Power Automate y un caso aplicado a tu industria para cerrar el ciclo.</div>
-        </div>
-        <div class="course-price">
-          <div class="price-badge-tanda">★ Primera tanda</div>
-          <div class="price-label">3 cuotas de</div>
-          <div class="price-cuota">$33.300</div>
-          <div class="price-total">Total $99.900</div>
-          <div class="price-regular">Regular: $124.900</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="pbi-special">
-      <div class="pbi-special-inner">
-        <div class="pbi-special-tag">☁️ Diferencial Katoda</div>
-        <div class="pbi-special-title">No simulamos. Trabajamos en entorno real.</div>
-        <div class="pbi-special-text">Mientras otros cursos enseñan en archivos locales, en Katoda trabajas con Power BI Service, workspace online y publicación en la nube desde el primer nivel. Exactamente como se hace en una empresa.</div>
-        <div class="pbi-features">
-          <div class="pbi-feat">🖥️ Power BI Desktop</div>
-          <div class="pbi-feat">🌐 Power BI Service</div>
-          <div class="pbi-feat">📁 Workspace online</div>
-          <div class="pbi-feat">☁️ Carga en la nube</div>
-          <div class="pbi-feat">📤 Publicación de dashboards</div>
-          <div class="pbi-feat">👥 Trabajo colaborativo</div>
-        </div>
-      </div>
     </div>
 
   </div>
-</section>
+</main>
 
-<!-- ══ RUTA RECOMENDADA ══════════════════════════════════════ -->
-<section class="ruta-sec" id="ruta">
-  <div class="section-inner">
-    <div class="section-label">Ruta destacada</div>
-    <h2 class="section-title">¿No sabes por dónde empezar?</h2>
-    <p class="section-subtitle">Esta es la ruta más elegida — y con razón. Te lleva de automatizar en Excel a publicar dashboards profesionales en Power BI.</p>
-
-    <div class="ruta-card">
-      <div class="ruta-card-inner">
-        <div class="ruta-badge">⭐ Combo más elegido</div>
-        <div class="ruta-name">Excel para BI <strong>+</strong> Power BI Básico</div>
-        <div class="ruta-desc">Deja atrás los reportes manuales. Con esta combinación automatizas la preparación de datos en Excel y construyes dashboards en Power BI que puedes publicar y compartir al instante.</div>
-        <div class="ruta-courses">
-          <div class="ruta-pill">Excel N2 — Automatización</div>
-          <div class="ruta-plus">+</div>
-          <div class="ruta-pill">Power BI N1 — Dashboard</div>
-        </div>
-        <div class="ruta-divider"></div>
-        <div class="ruta-pricing">
-          <div>
-            <div class="ruta-cuota-label">3 cuotas de</div>
-            <div class="ruta-cuota-val">$48.700</div>
-            <div class="ruta-total">Total $146.100</div>
-          </div>
-          <div class="ruta-save">✓ Ahorras $25.700</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ COMBOS TABLE ══════════════════════════════════════════ -->
-<section class="combos-sec" id="combos">
-  <div class="section-inner">
-    <div class="section-label">Promociones</div>
-    <h2 class="section-title">Más cursos, menos precio.</h2>
-    <p class="section-subtitle">Toma dos o más niveles y ahorra desde $21.000. Precios de primera tanda — cohorte junio 2026.</p>
-
-    <div class="combo-table-wrap">
-      <table class="combo-table">
-        <thead>
-          <tr>
-            <th>Combo / Ruta</th>
-            <th>Ideal para</th>
-            <th>Precio total</th>
-            <th>En cuotas</th>
-            <th>Ahorro</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><div class="combo-name">Excel N0 + N1</div></td>
-            <td><div class="combo-desc">De cero a analista en Excel</div></td>
-            <td><div class="combo-price">$121.400</div></td>
-            <td><div class="combo-cuota">3 × $40.500</div></td>
-            <td><div class="combo-save">↓ $21.400</div></td>
-          </tr>
-          <tr>
-            <td><div class="combo-name">Excel N1 + N2</div></td>
-            <td><div class="combo-desc">Análisis + automatización con Power Query</div></td>
-            <td><div class="combo-price">$136.700</div></td>
-            <td><div class="combo-cuota">3 × $45.600</div></td>
-            <td><div class="combo-save">↓ $24.100</div></td>
-          </tr>
-          <tr class="dest-row">
-            <td><div class="combo-name">Excel N2 + Power BI N1 <span class="star-pill">★ Más elegido</span></div></td>
-            <td><div class="combo-desc">Automatizar en Excel y visualizar en Power BI</div></td>
-            <td><div class="combo-price">$146.100</div></td>
-            <td><div class="combo-cuota">3 × $48.700</div></td>
-            <td><div class="combo-save">↓ $25.700</div></td>
-          </tr>
-          <tr>
-            <td><div class="combo-name">Power BI N1 + N2</div></td>
-            <td><div class="combo-desc">Del primer dashboard a lógica de negocio real</div></td>
-            <td><div class="combo-price">$152.000</div></td>
-            <td><div class="combo-cuota">3 × $50.700</div></td>
-            <td><div class="combo-save">↓ $26.800</div></td>
-          </tr>
-          <tr>
-            <td><div class="combo-name">Power BI N2 + N3</div></td>
-            <td><div class="combo-desc">Dashboards profesionales + soluciones completas</div></td>
-            <td><div class="combo-price">$163.900</div></td>
-            <td><div class="combo-cuota">3 × $54.600</div></td>
-            <td><div class="combo-save">↓ $28.900</div></td>
-          </tr>
-          <tr>
-            <td><div class="combo-name">Ruta Completa Excel</div></td>
-            <td><div class="combo-desc">Los 3 niveles de Excel</div></td>
-            <td><div class="combo-price">$194.400</div></td>
-            <td><div class="combo-cuota">3 × $64.800</div></td>
-            <td><div class="combo-save">↓ $34.300</div></td>
-          </tr>
-          <tr>
-            <td><div class="combo-name">Ruta Completa Power BI</div></td>
-            <td><div class="combo-desc">Los 3 niveles de Power BI</div></td>
-            <td><div class="combo-price">$236.900</div></td>
-            <td><div class="combo-cuota">3 × $79.000</div></td>
-            <td><div class="combo-save">↓ $41.800</div></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="combo-note">★ Precios de primera tanda — válidos para la cohorte de junio 2026 · 3 cuotas sin interés con tarjeta de crédito · Los grupos se cierran cuando se llenan.</div>
-  </div>
-</section>
-
-<!-- ══ CTA FINAL ═════════════════════════════════════════════ -->
-<section class="cta-sec" id="inscribirse">
-  <div class="section-inner">
-    <div class="section-label">Inscripción</div>
-    <h2 class="section-title">Lo que el mercado pide, por fin al alcance.</h2>
-    <p class="section-subtitle">Completa el formulario y en menos de 24 horas te orientamos según tu experiencia y tus objetivos. Los grupos se cierran cuando se llenan — y se llenan rápido.</p>
-
-    <div class="cta-urgency-badge">
-      🔴 Próxima cohorte: junio 2026 · Quedan pocas plazas
-    </div>
-    <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" target="_blank" class="cta-btn">
-      Quiero empezar
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<!-- Footer -->
+<footer class="footer">
+  <div class="contact-row">
+    <a href="https://wa.me/56987625904" target="_blank" class="contact-item">
+      <span class="contact-dot"></span>+56 9 8762 5904
     </a>
-
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-lbl">Formulario</div>
-        <a href="https://forms.gle/Ddz5AdKrKgrMU3F29" target="_blank" class="contact-val">forms.gle/Ddz5AdKrKgrMU3F29</a>
-      </div>
-      <div class="contact-card">
-        <div class="contact-lbl">WhatsApp</div>
-        <a href="https://wa.me/56987625904" target="_blank" class="contact-val">wa.me/56987625904</a>
-      </div>
-      <div class="contact-card">
-        <div class="contact-lbl">Instagram</div>
-        <a href="https://instagram.com/katoda.cl" target="_blank" class="contact-val">@katoda.cl</a>
-      </div>
-      <div class="contact-card">
-        <div class="contact-lbl">Web</div>
-        <a href="https://katoda.cl" target="_blank" class="contact-val">katoda.cl</a>
-      </div>
-    </div>
-
-    <div class="footer-line"><strong>Katoda</strong> · Formación aplicada en analítica de datos.</div>
+    <a href="https://instagram.com/katoda.cl" target="_blank" class="contact-item">
+      <span class="contact-dot"></span>@katoda.cl
+    </a>
+    <a href="https://katoda.cl" target="_blank" class="contact-item">
+      <span class="contact-dot"></span>katoda.cl
+    </a>
+    <a href="mailto:hola@katoda.cl" class="contact-item">
+      <span class="contact-dot"></span>hola@katoda.cl
+    </a>
   </div>
-</section>
-
-<!-- WhatsApp flotante -->
-<a href="https://wa.me/56987625904?text=Hola%20Katoda%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20los%20cursos" target="_blank" class="wa-float" title="Escríbenos por WhatsApp" aria-label="Contactar por WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 2C7.373 2 2 7.373 2 14c0 2.162.572 4.19 1.57 5.943L2 26l6.243-1.54A11.94 11.94 0 0014 26c6.627 0 12-5.373 12-12S20.627 2 14 2z" fill="white"/>
-    <path d="M10.2 8.5c-.3-.7-1.1-.7-1.4 0l-.8 1.8c-.2.4-.1.9.2 1.2 1 1 2.3 2.6 3.8 4.1 1.5 1.5 3.1 2.8 4.1 3.8.3.3.8.4 1.2.2l1.8-.8c.7-.3.7-1.1 0-1.4l-2-1c-.3-.1-.6-.1-.8.1l-.7.7c-.2.2-.5.2-.7.1-1-.5-2.2-1.5-3.3-2.6-1.1-1.1-2.1-2.3-2.6-3.3-.1-.2-.1-.5.1-.7l.7-.7c.2-.2.2-.5.1-.8l-1-2z" fill="#25D366"/>
-  </svg>
-</a>
-
-<script>
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav a[href^="#"]');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const active = document.querySelector('.nav a[href="#' + entry.target.id + '"]');
-        if (active) active.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-35% 0px -60% 0px' });
-  sections.forEach(s => observer.observe(s));
-</script>
+  <div class="footer-brand"><strong>Katoda</strong> · Formación aplicada en analítica de datos · Chile</div>
+</footer>
 
 </body>
 </html>
